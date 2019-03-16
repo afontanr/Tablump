@@ -58,8 +58,9 @@ public class PrincipalActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //navigation.setSelectedItemId();
 
-        showActionBar();
+        //showActionBar();
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("TODOS"));
@@ -97,14 +98,14 @@ public class PrincipalActivity extends AppCompatActivity {
             buscar(query);
         }
 
-        ImageButton btn_sobre = findViewById(R.id.btn_sobre);
-        btn_sobre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), NotificacionesActivity.class);
-                startActivity(intent);
-            }
-        });
+//        ImageButton btn_sobre = findViewById(R.id.btn_sobre);
+//        btn_sobre.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getBaseContext(), NotificacionesActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -137,6 +138,12 @@ public class PrincipalActivity extends AppCompatActivity {
             case R.id.action_search:
 
                 return true;
+
+            case R.id.btn_sobre:
+                Intent intent = new Intent(this, NotificacionesActivity.class);
+                startActivity(intent);
+                //finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -160,6 +167,7 @@ public class PrincipalActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled (false);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
+        //actionBar.setTitle("");
         actionBar.setTitle("Tablump");
         actionBar.setCustomView(v);
     }

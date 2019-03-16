@@ -1,5 +1,6 @@
 package com.example.tablump;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,13 +19,16 @@ public class NotificacionesActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    item.setCheckable(true);
+                    Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
+                    startActivity(intent);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_new_post);
+                    //mTextMessage.setText(R.string.title_new_post);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_profile);
+                    //mTextMessage.setText(R.string.title_profile);
                     return true;
             }
             return false;
@@ -39,6 +43,8 @@ public class NotificacionesActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        navigation.getMenu().getItem(0).setCheckable(false);
     }
 
 }

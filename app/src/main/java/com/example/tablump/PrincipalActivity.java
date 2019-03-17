@@ -40,9 +40,13 @@ public class PrincipalActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
+                    //Intent intent = new Intent(getBaseContext(), CrearPostActivity.class);
+                    //startActivity(intent);
                     mTextMessage.setText(R.string.title_new_post);
                     return true;
                 case R.id.navigation_notifications:
+                    //Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
+                    //startActivity(intent);
                     mTextMessage.setText(R.string.title_profile);
                     return true;
             }
@@ -61,6 +65,13 @@ public class PrincipalActivity extends AppCompatActivity {
         //navigation.setSelectedItemId();
 
         //showActionBar();
+
+        Intent intent = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            buscar(query);
+        }
+
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("TODOS"));
@@ -92,11 +103,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
         );
 
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            buscar(query);
-        }
+
 
 //        ImageButton btn_sobre = findViewById(R.id.btn_sobre);
 //        btn_sobre.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +130,6 @@ public class PrincipalActivity extends AppCompatActivity {
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
-
             searchView.setSearchableInfo(searchManager.getSearchableInfo(PrincipalActivity.this.getComponentName()));
         }
         return super.onCreateOptionsMenu(menu);
@@ -150,26 +156,23 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void buscar(String query) {
-        String busqueda = query;
-
-        Toast.makeText(PrincipalActivity.this, "Busca esto:" + busqueda, Toast.LENGTH_LONG).show();
-        //Intent intent = new Intent(getBaseContext(), SearchActivity.class);
-        //intent.putExtra("titulo", busqueda);
-        //startActivity(intent);
+        Intent intent = new Intent(getBaseContext(), SearchResultActivity.class);
+        intent.putExtra("titulo", query);
+        startActivity(intent);
     }
 
-    private void showActionBar() {
-        LayoutInflater inflator = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.action_bar_custom, null);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled (false);
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(true);
-        //actionBar.setTitle("");
-        actionBar.setTitle("Tablump");
-        actionBar.setCustomView(v);
-    }
+//    private void showActionBar() {
+//        LayoutInflater inflator = (LayoutInflater) this
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View v = inflator.inflate(R.layout.action_bar_custom, null);
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+//        actionBar.setDisplayShowHomeEnabled (false);
+//        actionBar.setDisplayShowCustomEnabled(true);
+//        actionBar.setDisplayShowTitleEnabled(true);
+//        //actionBar.setTitle("");
+//        actionBar.setTitle("Tablump");
+//        actionBar.setCustomView(v);
+//    }
 
 }

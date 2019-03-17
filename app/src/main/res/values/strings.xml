@@ -19,9 +19,10 @@
     <string name="title_home">Home</string>
     <string name="title_new_post">Crear Post</string>
     <string name="title_profile">Perfil</string>
-    <string name="search">Search</string>
+    <string name="search">Buscar</string>
     <string name="sobre">Sobre</string>
     <string name="title_activity_notificaciones">Notificaciones</string>
+    <string name="title_activity_busqueda"></string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 </resources>

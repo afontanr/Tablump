@@ -63,19 +63,26 @@
         <Button
             android:id="@+id/sign_in_button"
             style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
+            android:background="@drawable/custom_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="22dp"
             android:text="@string/action_sign_in"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/sign_up_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
+
+            android:background="@drawable/custom_button"
+            android:backgroundTint="@color/colorCustomButtonClaro"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="26dp"
             android:text="@string/action_sign_up"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
     </LinearLayout>

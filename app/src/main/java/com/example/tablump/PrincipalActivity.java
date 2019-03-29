@@ -30,6 +30,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
+    private String username;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -59,6 +61,9 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        Intent intent = getIntent();
+        username = intent.getStringExtra("usuario");
+
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -66,7 +71,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         //showActionBar();
 
-        Intent intent = getIntent();
+        intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             buscar(query);

@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchResultActivity"
+
+
+        <activity android:name=".RegisterActivity"
+            android:label="@string/title_activity_register"
+            android:parentActivityName=".LoginActivity">
+
+
+        </activity>
+        <activity
+            android:name=".SearchResultActivity"
             android:label="@string/title_activity_busqueda"
             android:parentActivityName=".PrincipalActivity">
             <meta-data
@@ -33,7 +43,6 @@
         <activity
             android:name=".PrincipalActivity"
             android:label="@string/title_activity_principal">
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

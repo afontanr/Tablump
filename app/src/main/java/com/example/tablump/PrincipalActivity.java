@@ -10,21 +10,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -47,9 +39,8 @@ public class PrincipalActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_new_post);
                     return true;
                 case R.id.navigation_notifications:
-                    //Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
-                    //startActivity(intent);
-                    mTextMessage.setText(R.string.title_profile);
+                    Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
+                    startActivity(intent);
                     return true;
             }
             return false;

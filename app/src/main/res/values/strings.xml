@@ -26,4 +26,7 @@
     <string name="title_activity_busqueda"></string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_logout">Cerrar sesión</string>
+
+    
 </resources>

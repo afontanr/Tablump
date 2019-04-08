@@ -15,14 +15,15 @@
     <!-- Login progress -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:contentDescription=""
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@mipmap/icon_tablump"
+         />
 
     <LinearLayout
         android:id="@+id/email_login_form"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

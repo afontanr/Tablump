@@ -52,6 +52,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().getItem(0).setCheckable(false);
     }
 
 
@@ -60,13 +61,6 @@ public class PerfilActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.dashboard_perfil, menu);
         MenuItem searchItem = menu.findItem(R.id.btn_edit_profile);
-        SearchView searchView = null;
-        if (searchItem != null) {
-            searchView = (SearchView) searchItem.getActionView();
-        }
-
-
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -78,7 +72,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.btn_edit_profile:
-              //  Intent intent = new Intent(this, EditarPerfilActivity.class);
+               // Intent intent = new Intent(this, EditarPerfilActivity.class);
                // startActivity(intent);
                 return true;
 

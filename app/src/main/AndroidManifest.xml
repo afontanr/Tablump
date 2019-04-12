@@ -15,7 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PostActivity"></activity>
+        <activity
+            android:name=".PostActivity"
+            android:label="@string/title_post"
+            android:parentActivityName=".PrincipalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tablump.PrincipalActivity" />
+
+        </activity>
         <activity
             android:name=".PerfilActivity"
             android:label="@string/title_profile"

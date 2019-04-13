@@ -15,6 +15,8 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,7 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
 
         Intent intent = getIntent();
         username = intent.getStringExtra("usuario");
@@ -109,6 +112,15 @@ public class PrincipalActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+        Button verPost = findViewById(R.id.btn_ver_post);
+        verPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

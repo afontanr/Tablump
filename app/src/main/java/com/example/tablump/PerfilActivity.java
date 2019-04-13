@@ -32,6 +32,7 @@ public class PerfilActivity extends AppCompatActivity {
                 case R.id.navigation_logout:
                     Intent intent2 = new Intent(getBaseContext(), LoginActivity.class);
                     startActivity(intent2);
+                    finish();
 
                     return true;
             }

@@ -3,17 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/registrar_boton"
+        android:id="@+id/editarperfil_boton"
         style="?android:textAppearanceSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="466dp"
+        android:layout_marginTop="465dp"
         android:layout_marginEnd="145dp"
         android:layout_marginBottom="218dp"
         android:background="@drawable/custom_button"
@@ -26,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/registro_contraseña"
+        android:id="@+id/editarperfil_contraseña"
         android:layout_width="359dp"
         android:layout_height="38dp"
         android:layout_marginStart="26dp"
@@ -44,13 +43,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/registro_correo"
+        android:id="@+id/editarperfil_correo"
         android:layout_width="359dp"
         android:layout_height="38dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="255dp"
         android:layout_marginEnd="26dp"
-        android:layout_marginBottom="437dp"
+        android:layout_marginBottom="438dp"
         android:hint="@string/prompt_usuario"
         android:inputType="text"
         android:maxLines="1"
@@ -62,13 +61,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/registro_usuario"
+        android:id="@+id/editarperfil_usuario"
         android:layout_width="359dp"
         android:layout_height="38dp"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="169dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="26dp"
-        android:layout_marginBottom="524dp"
+        android:layout_marginBottom="525dp"
         android:hint="@string/prompt_usuario"
         android:inputType="text"
         android:maxLines="1"

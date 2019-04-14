@@ -71,8 +71,8 @@ public class PerfilActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.btn_edit_profile:
-               // Intent intent = new Intent(this, EditarPerfilActivity.class);
-               // startActivity(intent);
+                Intent intent = new Intent(this, EditarPerfilActivity.class);
+                startActivity(intent);
                 return true;
 
 

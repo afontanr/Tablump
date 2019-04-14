@@ -30,8 +30,8 @@ public class NotificacionesActivity extends AppCompatActivity {
                     //mTextMessage.setText(R.string.title_new_post);
                     return true;
                 case R.id.navigation_notifications:
-                    //Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
-                    //startActivity(intent);
+                    intent = new Intent(getBaseContext(), PerfilActivity.class);
+                    startActivity(intent);
                     //mTextMessage.setText(R.string.title_profile);
                     return true;
             }

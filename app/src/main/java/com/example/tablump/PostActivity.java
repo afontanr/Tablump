@@ -51,8 +51,8 @@ public class PostActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.btn_edit_profile:
-                // Intent intent = new Intent(this, EditarPostActivity.class);
-                // startActivity(intent);
+                Intent intent = new Intent(this, EditarPostActivity.class);
+                startActivity(intent);
                 return true;
 
 

@@ -18,9 +18,14 @@
     <string name="title_activity_principal">Tablump</string>
     <string name="title_home">Inicio</string>
     <string name="title_new_post">Crear Post</string>
+    <string name="title_edit_post">Editar Post</string>
     <string name="title_profile">Perfil</string>
     <string name="search">Buscar</string>
     <string name="sobre">Sobre</string>
+    <string name="tituloPost">Título</string>
+    <string name="descripcionPost">Descripción</string>
+    <string name="categoriaPost">Categoría</string>
+    <string name="action_accept">Aceptar</string>
     <string name="title_activity_notificaciones">Notificaciones</string>
     <string name="title_activity_register">Registrarse</string>
     <string name="title_activity_editarperfil">Editar Perfil</string>
@@ -31,6 +36,19 @@
     <string name="title_logout">Cerrar sesión</string>
     <string name="title_post">Post</string>
     <string name="btn_aceptar">Aceptar</string>
+    <string name="action_crear_post">Crear</string>
+    <string name="action_actualizar_post">Actualizar</string>
+
+
+    <string name="spinner_prompt">Seleccione una categoría</string>
+    <string-array name="spinner_categorias">
+        <item>Categoría 1</item>
+        <item>Categoría 2</item>
+        <item>Categoría 3</item>
+        <item>Categoría 4</item>
+        <item>Categoría 5</item>
+        <item>Categoría 6</item>
+    </string-array>
 
 
 </resources>

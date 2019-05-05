@@ -25,8 +25,8 @@ public class NotificacionesActivity extends AppCompatActivity {
                     //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    //Intent intent = new Intent(getBaseContext(), CrearPostActivity.class);
-                    //startActivity(intent);
+                    intent = new Intent(getBaseContext(), CrearPostActivity.class);
+                    startActivity(intent);
                     //mTextMessage.setText(R.string.title_new_post);
                     return true;
                 case R.id.navigation_notifications:

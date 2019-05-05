@@ -25,8 +25,8 @@ public class PerfilActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_dashboard:
-                    //Intent intent = new Intent(getBaseContext(), CrearPostActivity.class);
-                    //startActivity(intent);
+                    intent = new Intent(getBaseContext(), CrearPostActivity.class);
+                    startActivity(intent);
 
                     return true;
                 case R.id.navigation_logout:

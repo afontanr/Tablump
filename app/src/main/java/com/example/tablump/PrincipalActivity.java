@@ -16,13 +16,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class PrincipalActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+
+    private ListView listView;
 
     private String username;
 
@@ -33,15 +38,15 @@ public class PrincipalActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_dashboard:
-                    //Intent intent = new Intent(getBaseContext(), CrearPostActivity.class);
-                    //startActivity(intent);
-                    mTextMessage.setText(R.string.title_new_post);
+                    Intent intent = new Intent(getBaseContext(), CrearPostActivity.class);
+                    startActivity(intent);
+                    //mTextMessage.setText(R.string.title_new_post);
                     return true;
                 case R.id.navigation_notifications:
-                    Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
+                    intent = new Intent(getBaseContext(), PerfilActivity.class);
                     startActivity(intent);
                     return true;
             }
@@ -58,7 +63,7 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("usuario");
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //navigation.setSelectedItemId();
@@ -102,6 +107,44 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
         );
 
+        //TODO los posts se recogerán de la base de datos o el SQLite
+        final String[] titulos = {
+                "Esto es un título 1",
+                "Esto es un título 2",
+                "Esto es un título 3",
+                "Esto es un título 4",
+                "Esto es un título 5",
+                "Esto es un título 6",
+                "Esto es un título 7"
+        } ;
+
+        String[] descripciones = {
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
+                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, "
+        } ;
+
+        CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+        listView=(ListView)findViewById(R.id.list);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(PrincipalActivity.this, "You Clicked at " + titulos[+ position], Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                //TODO ver por qué no va
+                //intent.putExtra("id", id);
+                startActivity(intent);
+
+            }
+        });
 
 
 //        ImageButton btn_sobre = findViewById(R.id.btn_sobre);
@@ -112,15 +155,16 @@ public class PrincipalActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
-        Button verPost = findViewById(R.id.btn_ver_post);
-        verPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                startActivity(intent);
 
-            }
-        });
+//        Button verPost = findViewById(R.id.btn_ver_post);
+//        verPost.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getBaseContext(), PostActivity.class);
+//                startActivity(intent);
+//
+//            }
+//        });
 
     }
 

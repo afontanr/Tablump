@@ -15,6 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".EditarPostActivity"
+            android:label="@string/title_edit_post"
+            android:parentActivityName=".PostActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tablump.PostActivity" />
+        </activity>
+        <activity
+            android:name=".CrearPostActivity"
+            android:label="@string/title_new_post"
+            android:parentActivityName=".PrincipalActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tablump.PrincipalActivity" />
+        </activity>
         <activity
             android:name=".PostActivity"
             android:label="@string/title_post"
@@ -22,7 +37,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tablump.PrincipalActivity" />
-
         </activity>
         <activity
             android:name=".PerfilActivity"
@@ -44,9 +58,9 @@
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:parentActivityName=".LoginActivity">
-                <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.example.tablump.LoginActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tablump.LoginActivity" />
         </activity>
         <activity
             android:name=".SearchResultActivity"

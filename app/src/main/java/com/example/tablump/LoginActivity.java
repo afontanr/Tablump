@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private TablumpDatabaseAdapter tablumpDatabaseAdapter;
+
 
     private String username = "";
 
@@ -23,16 +28,34 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        tablumpDatabaseAdapter=new TablumpDatabaseAdapter(getApplicationContext());
+        tablumpDatabaseAdapter.open();
+        tablumpDatabaseAdapter.insertUser("mail","no", "con");
+        tablumpDatabaseAdapter.close();
+
         Button signin = findViewById(R.id.sign_in_button);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //login()
+                TextView user = findViewById(R.id.usuario);
+                TextView password = findViewById(R.id.password);
 
-                Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
-                intent.putExtra("usuario", username);
-                startActivity(intent);
+                tablumpDatabaseAdapter.open();
+                if (tablumpDatabaseAdapter.getUser(user.getText().toString()).equals(password.getText().toString())){
+                    tablumpDatabaseAdapter.close();
+                    username = user.getText().toString();
+                    Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
+                    intent.putExtra("usuario", username);
+                    startActivity(intent);
+                }
+                else{
+                    tablumpDatabaseAdapter.close();
+                    Toast.makeText(getApplicationContext(), "Error al hacer login", Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
 

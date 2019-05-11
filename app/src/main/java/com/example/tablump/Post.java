@@ -4,12 +4,22 @@ public class Post {
 
     private String titulo;
     private String descripcion;
+    private String category;
     private String usuario;
 
-    public Post(String titulo, String descripcion, String usuario) {
+    public Post(String titulo, String descripcion, String category, String usuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.category = category;
         this.usuario = usuario;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getTitulo() {

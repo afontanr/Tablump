@@ -17,7 +17,7 @@ public class TablumpDatabaseAdapter {
     // TODO: Create public field for each column in your table.
     // SQL Statement to create a new database.
     static final String DATABASE_CREATE = "create table USER( ID integer primary key autoincrement,EMAIL text,USERNAME  text,PASSWORD text); " +
-            "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text);";
+            "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";
     // Variable to hold the database instance
     public static SQLiteDatabase db;
     // Context of the application using the database.
@@ -50,7 +50,7 @@ public class TablumpDatabaseAdapter {
         try {
             ContentValues newValues = new ContentValues();
             // Assign values for each column.
-            newValues.put("USERNAME", email);
+            newValues.put("EMAIL", email);
             newValues.put("USERNAME", username);
             newValues.put("PASSWORD", password);
             // Insert the row into your table
@@ -131,12 +131,12 @@ public class TablumpDatabaseAdapter {
         if(cursor.getCount()<1) // UserName Not Exist
             return null;
         cursor.moveToFirst();
-        post = new Post(title, cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")));
+        post = new Post(title, cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")),cursor.getString(cursor.getColumnIndex("USER")));
         return post;
     }
 
     // Method to Update an Existing
-    public void  updatePost(String title,String description, String category)
+    public void  updatePost(String title,String description, String category, String user)
     {
         //  create object of ContentValues
         ContentValues updatedValues = new ContentValues();
@@ -144,8 +144,48 @@ public class TablumpDatabaseAdapter {
         updatedValues.put("TITLE", title);
         updatedValues.put("DESCRIPTION", description);
         updatedValues.put("CATEGORY", category);
+        updatedValues.put("USER", user);
         String where="TITLE = ?";
         db.update("POST",updatedValues, where, new String[]{title});
+    }
+
+    // Method to get all posts with a title like the search parameter
+    public Post [] searchPosts(String search)
+    {
+
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "POST",
+                new String[] {"ID","TITLE","DESCRIPTION","CATEGORY","USER"},
+                "TITLE" + " LIKE ?",
+                new String[] { "%" + search + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Post[] posts = new Post[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            posts[i] = new Post(cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")),cursor.getString(cursor.getColumnIndex("USER")));
+        }
+        return posts;
+    }
+
+
+    public Post [] getPostsFromUser(String user)
+    {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "POST",
+                new String[] {"ID","TITLE","DESCRIPTION","CATEGORY","USER"},
+                "USER=" + "?",
+                new String[] { "%" + user + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Post[] posts = new Post[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            posts[i] = new Post(cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")),cursor.getString(cursor.getColumnIndex("USER")));
+        }
+        return posts;
     }
 
 }

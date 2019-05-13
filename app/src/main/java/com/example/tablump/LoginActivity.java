@@ -29,10 +29,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Se reinicia la base de datos y se meten los posts y usuarios iniciales
         getBaseContext().deleteDatabase("database.db");
         tablumpDatabaseAdapter=new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
         tablumpDatabaseAdapter.insertUser("mail","no", "con");
+        tablumpDatabaseAdapter.insertPost("Fiesta de las paellas", "Este viernes se celebra la fiesta de las paellas","anuncios");
+        tablumpDatabaseAdapter.insertPost("Mochila perdida", "Se ha encontrado una mochila sin mochilero que la cargue en el bloque 3","objetos perdidos");
+
         try {
             //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();
         }
@@ -46,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 //login()
                 TextView user = findViewById(R.id.usuario);

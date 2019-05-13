@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,8 +75,7 @@ public class PrincipalActivity extends AppCompatActivity {
         catch(Exception e) {
             Log.d("E","Usuario no existente");
         }
-        tablumpDatabaseAdapter.insertPost("Fiesta de las paellas", "Este viernes se celebra la fiesta de las paellas","anuncios");
-        tablumpDatabaseAdapter.insertPost("Mochila perdida", "Se ha encontrado una mochila sin mochilero que la cargue en el bloque 3","objetos perdidos");
+
 
 
         posts = tablumpDatabaseAdapter.searchPosts("");
@@ -146,6 +146,8 @@ public class PrincipalActivity extends AppCompatActivity {
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
             final String[] finalTitulos = titulos;
+//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
+//            button.setFocusable(false);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override

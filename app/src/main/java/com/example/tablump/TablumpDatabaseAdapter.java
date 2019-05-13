@@ -167,6 +167,7 @@ public class TablumpDatabaseAdapter {
         Post[] posts = new Post[cursor.getCount()];
         for(int i=0;i<cursor.getCount();i++){
             posts[i] = new Post(cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")),cursor.getString(cursor.getColumnIndex("USER")));
+            cursor.moveToNext();
         }
         return posts;
     }
@@ -186,6 +187,7 @@ public class TablumpDatabaseAdapter {
         Post[] posts = new Post[cursor.getCount()];
         for(int i=0;i<cursor.getCount();i++){
             posts[i] = new Post(cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")),cursor.getString(cursor.getColumnIndex("USER")));
+            cursor.moveToNext();
         }
         return posts;
     }

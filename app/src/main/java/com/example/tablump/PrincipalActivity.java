@@ -12,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
-    private ListView listView;
+    private Post [] posts;
 
     private String username;
 
@@ -62,6 +63,25 @@ public class PrincipalActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("usuario");
+
+        ////////////
+        TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
+        tablumpDatabaseAdapter.open();
+        //tablumpDatabaseAdapter.insertUser("mail","no", "con");
+        try {
+            //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();
+        }
+        catch(Exception e) {
+            Log.d("E","Usuario no existente");
+        }
+        tablumpDatabaseAdapter.insertPost("Fiesta de las paellas", "Este viernes se celebra la fiesta de las paellas","anuncios");
+        tablumpDatabaseAdapter.insertPost("Mochila perdida", "Se ha encontrado una mochila sin mochilero que la cargue en el bloque 3","objetos perdidos");
+
+
+        posts = tablumpDatabaseAdapter.searchPosts("");
+        ///////////
+
+
 
         //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -107,44 +127,41 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
         );
 
-        //TODO los posts se recogerán de la base de datos o el SQLite
-        final String[] titulos = {
-                "Esto es un título 1",
-                "Esto es un título 2",
-                "Esto es un título 3",
-                "Esto es un título 4",
-                "Esto es un título 5",
-                "Esto es un título 6",
-                "Esto es un título 7"
-        } ;
+        //TODO los posts se recogerán del SQLite
 
-        String[] descripciones = {
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, ",
-                "Esto es una descripción, Esto es una descripción, Esto es una descripción, Esto es una descripción, "
-        } ;
+        if(posts.length>0){
+            String[] titulos = new String[posts.length];
+            String[] descripciones = new String[posts.length];
+            String[] categorias = new String[posts.length];
+            String[] usuarios = new String[posts.length];
 
-        CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
-        listView=(ListView)findViewById(R.id.list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(PrincipalActivity.this, "You Clicked at " + titulos[+ position], Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                //TODO ver por qué no va
-                //intent.putExtra("id", id);
-                startActivity(intent);
-
+            for(int i = 0; i<posts.length;i++){
+                titulos[i] = posts[i].getTitulo();
+                descripciones[i] = posts[i].getDescripcion();
+                categorias[i] = posts[i].getCategory();
+                usuarios[i] = posts[i].getUsuario();
             }
-        });
+
+            CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+            ListView listView = (ListView) findViewById(R.id.list);
+            listView.setAdapter(adapter);
+            final String[] finalTitulos = titulos;
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                    //TODO ver por qué no va
+                    //intent.putExtra("titulo", finalTitulos[position]);
+                    startActivity(intent);
+
+                }
+            });
+        }
+
 
 
 //        ImageButton btn_sobre = findViewById(R.id.btn_sobre);

@@ -13,7 +13,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase _db) {
         try {
-            _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE);
+            _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_USERS);
+            _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_POSTS);
         }catch(Exception er){
             Log.e("Error","exception");
         }

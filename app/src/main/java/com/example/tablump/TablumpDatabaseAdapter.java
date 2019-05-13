@@ -11,13 +11,13 @@ public class TablumpDatabaseAdapter {
     static final String DATABASE_NAME = "database.db";
     String ok="OK";
     static final int DATABASE_VERSION = 1;
-    public  static String getPassword="";
+    public  static User getPassword=null;
     public static Post post;
     public static final int NAME_COLUMN = 1;
     // TODO: Create public field for each column in your table.
     // SQL Statement to create a new database.
-    static final String DATABASE_CREATE = "create table USER( ID integer primary key autoincrement,EMAIL text,USERNAME  text,PASSWORD text); " +
-            "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";
+    static final String DATABASE_CREATE_USERS = "create table USER( ID integer primary key autoincrement,EMAIL text,USERNAME  text,PASSWORD text);";
+    static final String DATABASE_CREATE_POSTS = "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";
     // Variable to hold the database instance
     public static SQLiteDatabase db;
     // Context of the application using the database.
@@ -44,6 +44,7 @@ public class TablumpDatabaseAdapter {
     {
         return db;
     }
+
     // method to insert a record in Table
     public String insertUser(String email, String username,String password)
     {
@@ -72,18 +73,19 @@ public class TablumpDatabaseAdapter {
         //Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
         return numberOFEntriesDeleted;
     }
-    // method to get the password  of userName
-    public String getUser(String userName)
+    // method to get the data of userName
+    public User getUser(String userName)
     {
         db=dbHelper.getReadableDatabase();
         Cursor cursor=db.query("USER", null, "USERNAME=?", new String[]{userName}, null, null, null);
         if(cursor.getCount()<1) // UserName Not Exist
-            return "NOT EXIST";
+            return null;
         cursor.moveToFirst();
-        getPassword= cursor.getString(cursor.getColumnIndex("PASSWORD"));
+        User us = new User(cursor.getString(cursor.getColumnIndex("EMAIL")),cursor.getString(cursor.getColumnIndex("USERNAME")),cursor.getString(cursor.getColumnIndex("PASSWORD")));
+        getPassword= us;
         return getPassword;
     }
-    // Method to Update an Existing
+    // Method to Update an Existing username password
     public void  updateUser(String userName,String password)
     {
         //  create object of ContentValues

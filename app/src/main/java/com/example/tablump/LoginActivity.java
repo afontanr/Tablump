@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,9 +29,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getBaseContext().deleteDatabase("database.db");
         tablumpDatabaseAdapter=new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
         tablumpDatabaseAdapter.insertUser("mail","no", "con");
+        try {
+            //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();
+        }
+        catch(Exception e) {
+            Log.d("E","Usuario no existente");
+        }
+
         tablumpDatabaseAdapter.close();
 
         Button signin = findViewById(R.id.sign_in_button);
@@ -42,17 +51,21 @@ public class LoginActivity extends AppCompatActivity {
                 TextView user = findViewById(R.id.usuario);
                 TextView password = findViewById(R.id.password);
 
-                tablumpDatabaseAdapter.open();
-                if (tablumpDatabaseAdapter.getUser(user.getText().toString()).equals(password.getText().toString())){
-                    tablumpDatabaseAdapter.close();
-                    username = user.getText().toString();
-                    Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
-                    intent.putExtra("usuario", username);
-                    startActivity(intent);
+                try {
+                    tablumpDatabaseAdapter.open();
+                    if (tablumpDatabaseAdapter.getUser(user.getText().toString()).getPassword().equals(password.getText().toString())) {
+                        tablumpDatabaseAdapter.close();
+                        username = user.getText().toString();
+                        Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
+                        intent.putExtra("usuario", username);
+                        startActivity(intent);
+                    } else {
+                        tablumpDatabaseAdapter.close();
+                        Toast.makeText(getApplicationContext(), "Error al hacer login", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else{
-                    tablumpDatabaseAdapter.close();
-                    Toast.makeText(getApplicationContext(), "Error al hacer login", Toast.LENGTH_LONG).show();
+                catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Usuario no existente", Toast.LENGTH_LONG).show();
                 }
 
 

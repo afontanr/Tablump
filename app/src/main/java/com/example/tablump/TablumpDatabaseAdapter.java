@@ -97,7 +97,7 @@ public class TablumpDatabaseAdapter {
         db.update("USER",updatedValues, where, new String[]{userName});
     }
 
-    public String insertPost(String title,String description, String category)
+    public String insertPost(String title,String description, String category, String user)
     {
         try {
             ContentValues newValues = new ContentValues();
@@ -105,6 +105,7 @@ public class TablumpDatabaseAdapter {
             newValues.put("TITLE", title);
             newValues.put("DESCRIPTION", description);
             newValues.put("CATEGORY", category);
+            newValues.put("USER", user);
             // Insert the row into your table
             db = dbHelper.getWritableDatabase();
             long result=db.insert("POST", null, newValues);
@@ -178,7 +179,7 @@ public class TablumpDatabaseAdapter {
         db=dbHelper.getReadableDatabase();
         Cursor cursor = db.query(true, "POST",
                 new String[] {"ID","TITLE","DESCRIPTION","CATEGORY","USER"},
-                "USER=" + "?",
+                "USER" + " LIKE ?",
                 new String[] { "%" + user + "%" },
                 null, null, null, null);
         if(cursor.getCount()<1) // UserName Not Exist

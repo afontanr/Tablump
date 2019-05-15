@@ -66,7 +66,7 @@ public class PrincipalActivity extends AppCompatActivity {
         username = intent.getStringExtra("usuario");
 
         ////////////
-        TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
+        final TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
         //tablumpDatabaseAdapter.insertUser("mail","no", "con");
         try {
@@ -99,11 +99,9 @@ public class PrincipalActivity extends AppCompatActivity {
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("TODOS"));
+        tabs.addTab(tabs.newTab().setText("MIS POSTS"));
         tabs.addTab(tabs.newTab().setText("FAVORITOS"));
-        tabs.addTab(tabs.newTab().setText("FILTRO 1"));
-        tabs.addTab(tabs.newTab().setText("FILTRO 2"));
-        tabs.addTab(tabs.newTab().setText("FILTRO 3"));
-        tabs.addTab(tabs.newTab().setText("FILTRO 4"));
+        tabs.addTab(tabs.newTab().setText("OTRO FILTRO"));
         tabs.setTabTextColors(Color.WHITE, ContextCompat.getColor(getBaseContext(), R.color.colorSelectedText));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
@@ -112,7 +110,187 @@ public class PrincipalActivity extends AppCompatActivity {
                 new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
-                        Toast.makeText(PrincipalActivity.this, tab.getText(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(PrincipalActivity.this, tab.getText(), Toast.LENGTH_LONG).show();
+                        if(tab.getPosition() == 0){
+                            posts = tablumpDatabaseAdapter.searchPosts("");
+                            if(posts.length>0){
+                                String[] titulos = new String[posts.length];
+                                String[] descripciones = new String[posts.length];
+                                String[] categorias = new String[posts.length];
+                                String[] usuarios = new String[posts.length];
+
+                                for(int i = 0; i<posts.length;i++){
+                                    titulos[i] = posts[i].getTitulo();
+                                    descripciones[i] = posts[i].getDescripcion();
+                                    categorias[i] = posts[i].getCategory();
+                                    usuarios[i] = posts[i].getUsuario();
+                                }
+
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                final String[] finalTitulos = titulos;
+//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
+//            button.setFocusable(false);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                                        //TODO ver por qué no va
+                                        //intent.putExtra("titulo", finalTitulos[position]);
+                                        startActivity(intent);
+
+                                    }
+                                });
+                            }
+                            else{
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(null);
+                                //notifyDataSetChanged();
+                            }
+                        }
+                        else if(tab.getPosition() == 1){
+
+                            posts = tablumpDatabaseAdapter.getPostsFromUser("no");
+                            if(posts.length>0){
+                                String[] titulos = new String[posts.length];
+                                String[] descripciones = new String[posts.length];
+                                String[] categorias = new String[posts.length];
+                                String[] usuarios = new String[posts.length];
+
+                                for(int i = 0; i<posts.length;i++){
+                                    titulos[i] = posts[i].getTitulo();
+                                    descripciones[i] = posts[i].getDescripcion();
+                                    categorias[i] = posts[i].getCategory();
+                                    usuarios[i] = posts[i].getUsuario();
+                                }
+
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                final String[] finalTitulos = titulos;
+//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
+//            button.setFocusable(false);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                                        //TODO ver por qué no va
+                                        //intent.putExtra("titulo", finalTitulos[position]);
+                                        startActivity(intent);
+
+                                    }
+                                });
+                            }
+                            else{
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(null);
+                                //notifyDataSetChanged();
+                            }
+                        }
+
+                        else if(tab.getPosition() == 2){
+
+                            //TODO FAVORITOS
+                            posts = tablumpDatabaseAdapter.searchPosts("mo");
+                            if(posts.length>0){
+                                String[] titulos = new String[posts.length];
+                                String[] descripciones = new String[posts.length];
+                                String[] categorias = new String[posts.length];
+                                String[] usuarios = new String[posts.length];
+
+                                for(int i = 0; i<posts.length;i++){
+                                    titulos[i] = posts[i].getTitulo();
+                                    descripciones[i] = posts[i].getDescripcion();
+                                    categorias[i] = posts[i].getCategory();
+                                    usuarios[i] = posts[i].getUsuario();
+                                }
+
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                final String[] finalTitulos = titulos;
+//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
+//            button.setFocusable(false);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                                        //TODO ver por qué no va
+                                        //intent.putExtra("titulo", finalTitulos[position]);
+                                        startActivity(intent);
+
+                                    }
+                                });
+                            }
+                            else{
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(null);
+                                //notifyDataSetChanged();
+                            }
+                        }
+
+                        else if(tab.getPosition() == 3){
+
+                            //TODO OTRO FILTRO
+                            posts = tablumpDatabaseAdapter.searchPosts("");
+                            if(posts.length>0){
+                                String[] titulos = new String[posts.length];
+                                String[] descripciones = new String[posts.length];
+                                String[] categorias = new String[posts.length];
+                                String[] usuarios = new String[posts.length];
+
+                                for(int i = 0; i<posts.length;i++){
+                                    titulos[i] = posts[i].getTitulo();
+                                    descripciones[i] = posts[i].getDescripcion();
+                                    categorias[i] = posts[i].getCategory();
+                                    usuarios[i] = posts[i].getUsuario();
+                                }
+
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                final String[] finalTitulos = titulos;
+//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
+//            button.setFocusable(false);
+                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view,
+                                                            int position, long id) {
+                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                                        //TODO ver por qué no va
+                                        //intent.putExtra("titulo", finalTitulos[position]);
+                                        startActivity(intent);
+
+                                    }
+                                });
+                            }
+                            else{
+                                ListView listView = (ListView) findViewById(R.id.list);
+                                listView.setAdapter(null);
+                                //notifyDataSetChanged();
+                            }
+                        }
+
                     }
 
                     @Override

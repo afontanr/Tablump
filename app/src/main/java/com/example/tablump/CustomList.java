@@ -34,4 +34,10 @@ public class CustomList extends ArrayAdapter<String>{
         txtDescripcion.setText(descripcion[position]);
         return rowView;
     }
+
+    @Override
+    public boolean isEnabled(int position)
+    {
+        return true;
+    }
 }

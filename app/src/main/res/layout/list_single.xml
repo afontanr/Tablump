@@ -3,12 +3,19 @@
     android:layout_width="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:descendantFocusability="blocksDescendants"
     android:layout_height="match_parent" >
 
         <TableRow
             android:layout_marginTop="20dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             >
                 <TextView
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:layout_weight="0.9"
                     android:layout_gravity="start"
                     android:layout_marginLeft="10dp"
@@ -18,10 +25,11 @@
                     android:layout_height="50dp"/>
 
                 <ImageButton
-                    android:layout_weight="0.1"
-                    android:foregroundGravity="right"
+                    android:clickable="false"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
+                    android:layout_weight="0.1"
+                    android:foregroundGravity="right"
                     android:id="@+id/like"
                     android:maxHeight="5dp"
                     android:maxWidth="5dp"
@@ -31,6 +39,9 @@
         </TableRow>
 
         <TextView
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:layout_marginLeft="10dp"
             android:id="@+id/txt_descripcion"
             android:layout_width="wrap_content"

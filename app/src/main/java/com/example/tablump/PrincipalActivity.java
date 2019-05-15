@@ -156,7 +156,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         }
                         else if(tab.getPosition() == 1){
 
-                            posts = tablumpDatabaseAdapter.getPostsFromUser("no");
+                            posts = tablumpDatabaseAdapter.getPostsFromUser(username);
                             if(posts.length>0){
                                 String[] titulos = new String[posts.length];
                                 String[] descripciones = new String[posts.length];
@@ -326,12 +326,14 @@ public class PrincipalActivity extends AppCompatActivity {
             final String[] finalTitulos = titulos;
 //            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
 //            button.setFocusable(false);
+
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PrincipalActivity.this, "You Clicked", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getBaseContext(), PostActivity.class);
                     //TODO ver por qué no va

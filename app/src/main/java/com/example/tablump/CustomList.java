@@ -1,12 +1,15 @@
 package com.example.tablump;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CustomList extends ArrayAdapter<String>{
 
@@ -23,7 +26,7 @@ public class CustomList extends ArrayAdapter<String>{
 
     }
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.list_single, null, true);
 
@@ -32,6 +35,27 @@ public class CustomList extends ArrayAdapter<String>{
 
         txtTitulo.setText(titulo[position]);
         txtDescripcion.setText(descripcion[position]);
+
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Pulsado en el post " + titulo[position], Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), PostActivity.class);
+
+                //intent.putExtra("titulo", finalTitulos[position]);
+                context.startActivity(intent);
+            }
+        });
+
+        final ImageButton likeButton = (ImageButton) rowView.findViewById(R.id.like);
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Pulsado en el like", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         return rowView;
     }
 

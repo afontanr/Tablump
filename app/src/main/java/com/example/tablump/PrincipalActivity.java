@@ -328,20 +328,20 @@ public class PrincipalActivity extends AppCompatActivity {
 //            button.setFocusable(false);
 
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    Toast.makeText(PrincipalActivity.this, "You Clicked", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                    //TODO ver por qué no va
-                    //intent.putExtra("titulo", finalTitulos[position]);
-                    startActivity(intent);
-
-                }
-            });
+//            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view,
+//                                        int position, long id) {
+//                    Toast.makeText(PrincipalActivity.this, "You Clicked", Toast.LENGTH_SHORT).show();
+//
+//                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
+//                    //TODO ver por qué no va
+//                    //intent.putExtra("titulo", finalTitulos[position]);
+//                    startActivity(intent);
+//
+//                }
+//            });
         }
 
 

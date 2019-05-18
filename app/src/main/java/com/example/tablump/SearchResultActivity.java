@@ -45,15 +45,18 @@ public class SearchResultActivity extends AppCompatActivity {
             String[] descripciones = new String[posts.length];
             String[] categorias = new String[posts.length];
             String[] usuarios = new String[posts.length];
+            Boolean[] isLiked = new Boolean[posts.length];
 
             for(int i = 0; i<posts.length;i++){
                 titulos[i] = posts[i].getTitulo();
                 descripciones[i] = posts[i].getDescripcion();
                 categorias[i] = posts[i].getCategory();
                 usuarios[i] = posts[i].getUsuario();
+                //TODO ESTO VENDRÁ DE LA DDBB
+                isLiked[i]= false;
             }
 
-            CustomList adapter = new CustomList(SearchResultActivity.this, titulos, descripciones);
+            CustomList adapter = new CustomList(SearchResultActivity.this, titulos, descripciones, isLiked);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
             final String[] finalTitulos = titulos;

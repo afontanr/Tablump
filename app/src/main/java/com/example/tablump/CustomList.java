@@ -17,12 +17,15 @@ public class CustomList extends ArrayAdapter<String>{
 
     private final String[] titulo;
     private final String[] descripcion;
+    private final Boolean[] isLiked;
+
     public CustomList(Activity context,
-                      String[] titulo, String[] descripcion) {
+                      String[] titulo, String[] descripcion, Boolean[] isLiked) {
         super(context, R.layout.list_single, titulo);
         this.context = context;
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.isLiked = isLiked;
 
     }
     @Override
@@ -48,10 +51,27 @@ public class CustomList extends ArrayAdapter<String>{
         });
 
         final ImageButton likeButton = (ImageButton) rowView.findViewById(R.id.like);
+
+        if (isLiked[position]){
+            likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_lleno", null, null));
+        }
+        else{
+            likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_vacio", null, null));
+        }
+
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Pulsado en el like", Toast.LENGTH_SHORT).show();
+                if (isLiked[position]){
+                    //Toast.makeText(getContext(), "Pulsado en el like", Toast.LENGTH_SHORT).show();
+                    likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_vacio", null, null));
+                    isLiked[position] = false;
+                }
+                else{
+                    likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_lleno", null, null));
+                    isLiked[position] = true;
+                }
+
             }
         });
 

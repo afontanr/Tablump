@@ -118,35 +118,23 @@ public class PrincipalActivity extends AppCompatActivity {
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
                                 String[] usuarios = new String[posts.length];
+                                Boolean[] isLiked = new Boolean[posts.length];
 
                                 for(int i = 0; i<posts.length;i++){
                                     titulos[i] = posts[i].getTitulo();
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
+                                    //TODO ESTO VENDRÁ DE LA DDBB
+                                    isLiked[i]= false;
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                                 final String[] finalTitulos = titulos;
-//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
-//            button.setFocusable(false);
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view,
-                                                            int position, long id) {
-                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                                        //TODO ver por qué no va
-                                        //intent.putExtra("titulo", finalTitulos[position]);
-                                        startActivity(intent);
-
-                                    }
-                                });
                             }
                             else{
                                 ListView listView = (ListView) findViewById(R.id.list);
@@ -162,35 +150,23 @@ public class PrincipalActivity extends AppCompatActivity {
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
                                 String[] usuarios = new String[posts.length];
+                                Boolean[] isLiked = new Boolean[posts.length];
 
                                 for(int i = 0; i<posts.length;i++){
                                     titulos[i] = posts[i].getTitulo();
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
+                                    //TODO ESTO VENDRÁ DE LA DDBB
+                                    isLiked[i]= false;
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                                 final String[] finalTitulos = titulos;
-//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
-//            button.setFocusable(false);
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view,
-                                                            int position, long id) {
-                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                                        //TODO ver por qué no va
-                                        //intent.putExtra("titulo", finalTitulos[position]);
-                                        startActivity(intent);
-
-                                    }
-                                });
                             }
                             else{
                                 ListView listView = (ListView) findViewById(R.id.list);
@@ -208,35 +184,23 @@ public class PrincipalActivity extends AppCompatActivity {
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
                                 String[] usuarios = new String[posts.length];
+                                Boolean[] isLiked = new Boolean[posts.length];
 
                                 for(int i = 0; i<posts.length;i++){
                                     titulos[i] = posts[i].getTitulo();
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
+                                    //TODO ESTO VENDRÁ DE LA DDBB
+                                    isLiked[i]= false;
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                                 final String[] finalTitulos = titulos;
-//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
-//            button.setFocusable(false);
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view,
-                                                            int position, long id) {
-                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                                        //TODO ver por qué no va
-                                        //intent.putExtra("titulo", finalTitulos[position]);
-                                        startActivity(intent);
-
-                                    }
-                                });
                             }
                             else{
                                 ListView listView = (ListView) findViewById(R.id.list);
@@ -254,35 +218,23 @@ public class PrincipalActivity extends AppCompatActivity {
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
                                 String[] usuarios = new String[posts.length];
+                                Boolean[] isLiked = new Boolean[posts.length];
 
                                 for(int i = 0; i<posts.length;i++){
                                     titulos[i] = posts[i].getTitulo();
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
+                                    //TODO ESTO VENDRÁ DE LA DDBB
+                                    isLiked[i]= false;
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
                                 final String[] finalTitulos = titulos;
-//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
-//            button.setFocusable(false);
-                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view,
-                                                            int position, long id) {
-                                        Toast.makeText(PrincipalActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                                        //TODO ver por qué no va
-                                        //intent.putExtra("titulo", finalTitulos[position]);
-                                        startActivity(intent);
-
-                                    }
-                                });
                             }
                             else{
                                 ListView listView = (ListView) findViewById(R.id.list);
@@ -312,15 +264,18 @@ public class PrincipalActivity extends AppCompatActivity {
             String[] descripciones = new String[posts.length];
             String[] categorias = new String[posts.length];
             String[] usuarios = new String[posts.length];
+            Boolean[] isLiked = new Boolean[posts.length];
 
             for(int i = 0; i<posts.length;i++){
                 titulos[i] = posts[i].getTitulo();
                 descripciones[i] = posts[i].getDescripcion();
                 categorias[i] = posts[i].getCategory();
                 usuarios[i] = posts[i].getUsuario();
+                //TODO ESTO VENDRÁ DE LA DDBB
+                isLiked[i]= false;
             }
 
-            CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones);
+            CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
             final String[] finalTitulos = titulos;
@@ -343,28 +298,6 @@ public class PrincipalActivity extends AppCompatActivity {
 //                }
 //            });
         }
-
-
-
-//        ImageButton btn_sobre = findViewById(R.id.btn_sobre);
-//        btn_sobre.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getBaseContext(), NotificacionesActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-//        Button verPost = findViewById(R.id.btn_ver_post);
-//        verPost.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getBaseContext(), PostActivity.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-
     }
 
     @Override

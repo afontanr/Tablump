@@ -101,7 +101,7 @@ public class PrincipalActivity extends AppCompatActivity {
         tabs.addTab(tabs.newTab().setText("TODOS"));
         tabs.addTab(tabs.newTab().setText("MIS POSTS"));
         tabs.addTab(tabs.newTab().setText("FAVORITOS"));
-        tabs.addTab(tabs.newTab().setText("OTRO FILTRO"));
+        tabs.addTab(tabs.newTab().setText("ANUNCIOS"));
         tabs.setTabTextColors(Color.WHITE, ContextCompat.getColor(getBaseContext(), R.color.colorSelectedText));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
@@ -212,7 +212,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         else if(tab.getPosition() == 3){
 
                             //TODO OTRO FILTRO
-                            posts = tablumpDatabaseAdapter.searchPosts("");
+                            posts = tablumpDatabaseAdapter.getPostsFromCategory("anuncios");
                             if(posts.length>0){
                                 String[] titulos = new String[posts.length];
                                 String[] descripciones = new String[posts.length];

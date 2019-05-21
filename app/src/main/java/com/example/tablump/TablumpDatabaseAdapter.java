@@ -193,4 +193,23 @@ public class TablumpDatabaseAdapter {
         return posts;
     }
 
+    public Post [] getPostsFromCategory(String category)
+    {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "POST",
+                new String[] {"ID","TITLE","DESCRIPTION","CATEGORY","USER"},
+                "CATEGORY" + " LIKE ?",
+                new String[] { "%" + category + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Post[] posts = new Post[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            posts[i] = new Post(cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("DESCRIPTION")),cursor.getString(cursor.getColumnIndex("CATEGORY")),cursor.getString(cursor.getColumnIndex("USER")));
+            cursor.moveToNext();
+        }
+        return posts;
+    }
+
 }

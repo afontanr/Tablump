@@ -37,7 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         tablumpDatabaseAdapter.insertPost("Fiesta de las paellas", "Este viernes se celebra la fiesta de las paellas","anuncios", "no");
         tablumpDatabaseAdapter.insertPost("Mochila perdida", "Se ha encontrado una mochila sin mochilero que la cargue en el bloque 3","objetos perdidos", "Paco");
         tablumpDatabaseAdapter.insertPost("Fin de las clases", "El último día de clases será el 27 de mayo","anuncios", "Alba");
-        tablumpDatabaseAdapter.insertPost("¿Dónde está el aula virtual?", "Acabo de llegar a la escuela, ¿dónde puedo encontrar el aula virtual?","Dudas", "Roberto");
+        tablumpDatabaseAdapter.insertPost("¿Dónde está el aula virtual?", "Acabo de llegar a la escuela, ¿dónde puedo encontrar el aula virtual?","dudas", "Roberto");
+        tablumpDatabaseAdapter.insertPost("Jornadas nocturnas", "Mañana comienzan las jornadas nocturnas","anuncios", "Alba");
+        tablumpDatabaseAdapter.insertPost("He perdido un reloj", "He perdido un reloj de pulsera y ahora no sé qué hora es, ¿alguien lo ha visto?","objetos perdidos", "Gonzalo");
+        tablumpDatabaseAdapter.insertPost("¿Cuándo terminan las clases?", "¿Terminan esta semana o la que viene?","dudas", "Paco");
+
 
         try {
             //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();

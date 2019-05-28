@@ -13,11 +13,17 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NotificacionesActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+
+    private String username;
+
+    private Notification [] notifications;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,8 +57,38 @@ public class NotificacionesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificaciones);
 
+        Intent intent = getIntent();
+        username = intent.getStringExtra("usuario");
 
-        ////////////////////////////////////////////////////////////////////////////
+        TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
+        tablumpDatabaseAdapter.open();
+
+        notifications = tablumpDatabaseAdapter.getNotificationsFromUser(username);
+
+
+        if(notifications.length>0){
+
+            String[] tipos = new String[notifications.length];
+            String[] titulos = new String[notifications.length];
+            String[] usuariosRecibe = new String[notifications.length];
+            String[] usuariosRealiza = new String[notifications.length];
+
+            for(int i = 0; i<notifications.length;i++){
+                tipos[i] = notifications[i].getTipo();
+                titulos[i] = notifications[i].getTitulo();
+                usuariosRecibe[i] = notifications[i].getUsuarioRecibe();
+                usuariosRealiza[i] = notifications[i].getUsuarioRealiza();
+            }
+
+            CustomListNotificaciones adapter = new CustomListNotificaciones(NotificacionesActivity.this, tipos, titulos, usuariosRecibe, usuariosRealiza);
+            ListView listView = (ListView) findViewById(R.id.list);
+            listView.setAdapter(adapter);
+            final String[] finalTitulos = titulos;
+        }
+
+
+
+        /*////////////////////////////////////////////////////////////////////////////
         NotificationManager notificationManager = (NotificationManager)
                 getSystemService(Context.NOTIFICATION_SERVICE);
         final String channelId = "id1";
@@ -73,7 +109,7 @@ public class NotificacionesActivity extends AppCompatActivity {
 
         // Notificación de like
         String title = "UN POST CONCRETO";
-        Intent intent = new Intent(this, PostActivity.class);
+        intent = new Intent(this, PostActivity.class);
         intent.putExtra("titulo", title);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -113,7 +149,7 @@ public class NotificacionesActivity extends AppCompatActivity {
         // notificationId is a unique int for each notification that you must define
         notificationManagerCompat.notify(2, builder.build());
 
-        ////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////*/
 
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);

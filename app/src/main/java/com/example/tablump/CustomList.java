@@ -45,7 +45,7 @@ public class CustomList extends ArrayAdapter<String>{
                 Toast.makeText(getContext(), "Pulsado en el post " + titulo[position], Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), PostActivity.class);
 
-                //intent.putExtra("titulo", finalTitulos[position]);
+                intent.putExtra("titulo", titulo[position]);
                 context.startActivity(intent);
             }
         });

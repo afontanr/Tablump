@@ -331,6 +331,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
             case R.id.btn_sobre:
                 Intent intent = new Intent(this, NotificacionesActivity.class);
+                intent.putExtra("usuario", username);
                 startActivity(intent);
                 //finish();
                 return true;

@@ -15,6 +15,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         try {
             _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_USERS);
             _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_POSTS);
+            _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_NOTIFICATIONS);
         }catch(Exception er){
             Log.e("Error","exception");
         }
@@ -30,7 +31,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // previous versions can be handled by comparing _oldVersion and _newVersion
         // values.
         // The simplest case is to drop the old table and create a new one.
-        _db.execSQL("DROP TABLE IF EXISTS " + "LOGIN");
+        _db.execSQL("DROP TABLE IF EXISTS " + "USER");
+        _db.execSQL("DROP TABLE IF EXISTS " + "POST");
+        _db.execSQL("DROP TABLE IF EXISTS " + "NOTIFICARION");
 
         // Create a new one.
         onCreate(_db);

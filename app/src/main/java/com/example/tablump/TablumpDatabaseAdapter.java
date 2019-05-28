@@ -18,6 +18,7 @@ public class TablumpDatabaseAdapter {
     // SQL Statement to create a new database.
     static final String DATABASE_CREATE_USERS = "create table USER( ID integer primary key autoincrement,EMAIL text,USERNAME  text,PASSWORD text);";
     static final String DATABASE_CREATE_POSTS = "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";
+    static final String DATABASE_CREATE_NOTIFICATIONS = "create table NOTIFICATION( ID integer primary key autoincrement,TYPE text, TITLE  text,USERRECEIVE text,USERMAKE text);";
     // Variable to hold the database instance
     public static SQLiteDatabase db;
     // Context of the application using the database.
@@ -211,5 +212,47 @@ public class TablumpDatabaseAdapter {
         }
         return posts;
     }
+
+
+
+    public Notification [] getNotificationsFromUser(String user)
+    {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "NOTIFICATION",
+                new String[] {"ID","TYPE","TITLE","USERRECEIVE","USERMAKE"},
+                "USERRECEIVE" + " LIKE ?",
+                new String[] { "%" + user + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Notification[] notifications = new Notification[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            notifications[i] = new Notification(cursor.getString(cursor.getColumnIndex("TYPE")),cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("USERRECEIVE")),cursor.getString(cursor.getColumnIndex("USERMAKE")));
+            cursor.moveToNext();
+        }
+        return notifications;
+    }
+
+    public String insertNotification(String type, String title,String userReceive, String userMake)
+    {
+        try {
+            ContentValues newValues = new ContentValues();
+            // Assign values for each column.
+            newValues.put("TYPE", type);
+            newValues.put("TITLE", title);
+            newValues.put("USERRECEIVE", userReceive);
+            newValues.put("USERMAKE", userMake);
+            // Insert the row into your table
+            db = dbHelper.getWritableDatabase();
+            long result=db.insert("NOTIFICATION", null, newValues);
+            System.out.print(result);
+        }catch(Exception ex) {
+            System.out.println("Exceptions " +ex);
+            Log.e("Note", "One row entered");
+        }
+        return ok;
+    }
+
 
 }

@@ -125,11 +125,11 @@ public class PrincipalActivity extends AppCompatActivity {
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
-                                    //TODO ESTO VENDRÁ DE LA DDBB
-                                    isLiked[i]= false;
+
+                                    isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked, username);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -145,6 +145,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         else if(tab.getPosition() == 1){
 
                             posts = tablumpDatabaseAdapter.getPostsFromUser(username);
+
                             if(posts.length>0){
                                 String[] titulos = new String[posts.length];
                                 String[] descripciones = new String[posts.length];
@@ -157,11 +158,11 @@ public class PrincipalActivity extends AppCompatActivity {
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
-                                    //TODO ESTO VENDRÁ DE LA DDBB
-                                    isLiked[i]= false;
+
+                                    isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked, username);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -178,30 +179,37 @@ public class PrincipalActivity extends AppCompatActivity {
                         else if(tab.getPosition() == 2){
 
                             //TODO FAVORITOS
-                            posts = tablumpDatabaseAdapter.searchPosts("mo");
-                            if(posts.length>0){
-                                String[] titulos = new String[posts.length];
-                                String[] descripciones = new String[posts.length];
-                                String[] categorias = new String[posts.length];
-                                String[] usuarios = new String[posts.length];
-                                Boolean[] isLiked = new Boolean[posts.length];
-
-                                for(int i = 0; i<posts.length;i++){
-                                    titulos[i] = posts[i].getTitulo();
-                                    descripciones[i] = posts[i].getDescripcion();
-                                    categorias[i] = posts[i].getCategory();
-                                    usuarios[i] = posts[i].getUsuario();
-                                    //TODO ESTO VENDRÁ DE LA DDBB
-                                    isLiked[i]= false;
+                            Like [] likes = tablumpDatabaseAdapter.getLikesFromUser(username);
+                            if (likes != null){
+                                posts = new Post[likes.length];
+                                for(int i = 0;i<likes.length;i++){
+                                    posts[i] = tablumpDatabaseAdapter.getPost(likes[i].getTitulo());
                                 }
+                                if(posts.length>0){
+                                    String[] titulos = new String[posts.length];
+                                    String[] descripciones = new String[posts.length];
+                                    String[] categorias = new String[posts.length];
+                                    String[] usuarios = new String[posts.length];
+                                    Boolean[] isLiked = new Boolean[posts.length];
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
-                                ListView listView = (ListView) findViewById(R.id.list);
-                                listView.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                                final String[] finalTitulos = titulos;
+                                    for(int i = 0; i<posts.length;i++){
+                                        titulos[i] = posts[i].getTitulo();
+                                        descripciones[i] = posts[i].getDescripcion();
+                                        categorias[i] = posts[i].getCategory();
+                                        usuarios[i] = posts[i].getUsuario();
 
+                                        isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
+                                    }
+
+                                    CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked, username);
+                                    ListView listView = (ListView) findViewById(R.id.list);
+                                    listView.setAdapter(adapter);
+                                    adapter.notifyDataSetChanged();
+                                    final String[] finalTitulos = titulos;
+
+                                }
                             }
+
                             else{
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(null);
@@ -225,11 +233,11 @@ public class PrincipalActivity extends AppCompatActivity {
                                     descripciones[i] = posts[i].getDescripcion();
                                     categorias[i] = posts[i].getCategory();
                                     usuarios[i] = posts[i].getUsuario();
-                                    //TODO ESTO VENDRÁ DE LA DDBB
-                                    isLiked[i]= false;
+
+                                    isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
                                 }
 
-                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
+                                CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked, username);
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
@@ -271,11 +279,12 @@ public class PrincipalActivity extends AppCompatActivity {
                 descripciones[i] = posts[i].getDescripcion();
                 categorias[i] = posts[i].getCategory();
                 usuarios[i] = posts[i].getUsuario();
-                //TODO ESTO VENDRÁ DE LA DDBB
-                isLiked[i]= false;
+
+
+                isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
             }
 
-            CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked);
+            CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked, username);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
             final String[] finalTitulos = titulos;
@@ -298,6 +307,12 @@ public class PrincipalActivity extends AppCompatActivity {
 //                }
 //            });
         }
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 
     @Override
@@ -343,6 +358,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private void buscar(String query) {
         Intent intent = new Intent(getBaseContext(), SearchResultActivity.class);
         intent.putExtra("titulo", query);
+        intent.putExtra("usuario", username);
         startActivity(intent);
     }
 

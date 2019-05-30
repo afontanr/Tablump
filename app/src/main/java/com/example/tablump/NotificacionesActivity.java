@@ -157,4 +157,19 @@ public class NotificacionesActivity extends AppCompatActivity {
         navigation.getMenu().getItem(0).setCheckable(false);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        intent.putExtra("usuario", username);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

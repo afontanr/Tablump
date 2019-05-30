@@ -18,14 +18,20 @@ public class CustomList extends ArrayAdapter<String>{
     private final String[] titulo;
     private final String[] descripcion;
     private final Boolean[] isLiked;
+    private final String username;
+    private final TablumpDatabaseAdapter tablumpDatabaseAdapter;
 
     public CustomList(Activity context,
-                      String[] titulo, String[] descripcion, Boolean[] isLiked) {
+                      String[] titulo, String[] descripcion, Boolean[] isLiked, String username) {
         super(context, R.layout.list_single, titulo);
         this.context = context;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.isLiked = isLiked;
+
+        this.username = username;
+        this.tablumpDatabaseAdapter = new TablumpDatabaseAdapter(context);
+        tablumpDatabaseAdapter.open();
 
     }
     @Override
@@ -64,10 +70,13 @@ public class CustomList extends ArrayAdapter<String>{
             public void onClick(View v) {
                 if (isLiked[position]){
                     //Toast.makeText(getContext(), "Pulsado en el like", Toast.LENGTH_SHORT).show();
+
+                    tablumpDatabaseAdapter.deleteLike(titulo[position], username);
                     likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_vacio", null, null));
                     isLiked[position] = false;
                 }
                 else{
+                    tablumpDatabaseAdapter.insertLike(titulo[position], username);
                     likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_lleno", null, null));
                     isLiked[position] = true;
                 }

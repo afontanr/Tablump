@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private Post [] posts;
 
     private String busqueda = "";
+    private String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         busqueda = intent.getStringExtra("titulo");
+        username = intent.getStringExtra("usuario");
 
         ////////////
         TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
@@ -56,7 +59,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 isLiked[i]= false;
             }
 
-            CustomList adapter = new CustomList(SearchResultActivity.this, titulos, descripciones, isLiked);
+            CustomList adapter = new CustomList(SearchResultActivity.this, titulos, descripciones, isLiked, username);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
             final String[] finalTitulos = titulos;
@@ -75,5 +78,21 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        intent.putExtra("usuario", username);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

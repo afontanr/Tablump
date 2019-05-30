@@ -43,20 +43,22 @@ public class LoginActivity extends AppCompatActivity {
         tablumpDatabaseAdapter.insertPost("¿Cuándo terminan las clases?", "¿Terminan esta semana o la que viene?","dudas", "Paco");
 
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
+
+        tablumpDatabaseAdapter.insertLike("Mochila perdida", "no");
 
 
         try {

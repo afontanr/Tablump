@@ -19,6 +19,7 @@ public class TablumpDatabaseAdapter {
     static final String DATABASE_CREATE_USERS = "create table USER( ID integer primary key autoincrement,EMAIL text,USERNAME  text,PASSWORD text);";
     static final String DATABASE_CREATE_POSTS = "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";
     static final String DATABASE_CREATE_NOTIFICATIONS = "create table NOTIFICATION( ID integer primary key autoincrement,TYPE text, TITLE  text,USERRECEIVE text,USERMAKE text);";
+    static final String DATABASE_CREATE_LIKES = "create table LIKEUSER( ID integer primary key autoincrement,TITLE text, USER  text);";
     // Variable to hold the database instance
     public static SQLiteDatabase db;
     // Context of the application using the database.
@@ -252,6 +253,83 @@ public class TablumpDatabaseAdapter {
             Log.e("Note", "One row entered");
         }
         return ok;
+    }
+
+    public Like [] getLikesFromUser(String user)
+    {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "LIKEUSER",
+                new String[] {"ID","TITLE","USER"},
+                "USER" + " LIKE ?",
+                new String[] { "%" + user + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Like[] likes = new Like[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            likes[i] = new Like(cursor.getString(cursor.getColumnIndex("TITLE")),cursor.getString(cursor.getColumnIndex("USER")));
+            cursor.moveToNext();
+        }
+        return likes;
+    }
+
+    public Like [] getLikesFromPost(String title)
+    {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "LIKEUSER",
+                new String[] {"ID","TITLE","USER"},
+                "TITLE" + " LIKE ?",
+                new String[] { "%" + title + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Like[] likes = new Like[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            likes[i] = new Like(cursor.getString(cursor.getColumnIndex("TITLE")),cursor.getString(cursor.getColumnIndex("USER")));
+            cursor.moveToNext();
+        }
+        return likes;
+    }
+
+    public Boolean getLikePostUser(String title, String user)
+    {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "LIKEUSER",
+                new String[] {"ID","TITLE","USER"},
+                "TITLE" + " LIKE ? and USER LIKE ?",
+                new String[] { "%" + title + "%" , "%" + user + "%"},
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return false;
+        else return true;
+    }
+
+    public String insertLike(String title,String user)
+    {
+        try {
+            ContentValues newValues = new ContentValues();
+            // Assign values for each column.
+            newValues.put("TITLE", title);
+            newValues.put("USER", user);
+            // Insert the row into your table
+            db = dbHelper.getWritableDatabase();
+            long result=db.insert("LIKEUSER", null, newValues);
+            System.out.print(result);
+        }catch(Exception ex) {
+            System.out.println("Exceptions " +ex);
+            Log.e("Note", "One row entered");
+        }
+        return ok;
+    }
+
+    public int deleteLike(String title,String user)
+    {
+        String where="TITLE=? and USER=?";
+        int numberOFEntriesDeleted= db.delete("LIKEUSER", where, new String[]{title,user}) ;
+        //Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
+        return numberOFEntriesDeleted;
     }
 
 

@@ -22,8 +22,6 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-
-
         Intent intent = getIntent();
         busqueda = intent.getStringExtra("titulo");
         username = intent.getStringExtra("usuario");
@@ -31,19 +29,10 @@ public class SearchResultActivity extends AppCompatActivity {
         ////////////
         TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
-        //tablumpDatabaseAdapter.insertUser("mail","no", "con");
-        try {
-            //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();
-        }
-        catch(Exception e) {
-            Log.d("E","Usuario no existente");
-        }
-
 
         posts = tablumpDatabaseAdapter.searchPosts(busqueda);
-        //Toast.makeText(SearchResultActivity.this, "Busca esto: " + busqueda, Toast.LENGTH_LONG).show();
 
-        if(posts.length>0){
+        if(posts != null && posts.length>0){
             String[] titulos = new String[posts.length];
             String[] descripciones = new String[posts.length];
             String[] categorias = new String[posts.length];
@@ -55,28 +44,14 @@ public class SearchResultActivity extends AppCompatActivity {
                 descripciones[i] = posts[i].getDescripcion();
                 categorias[i] = posts[i].getCategory();
                 usuarios[i] = posts[i].getUsuario();
-                //TODO ESTO VENDRÁ DE LA DDBB
-                isLiked[i]= false;
+
+                isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
             }
 
             CustomList adapter = new CustomList(SearchResultActivity.this, titulos, descripciones, isLiked, username);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
             final String[] finalTitulos = titulos;
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-                    Toast.makeText(SearchResultActivity.this, "You Clicked at " + finalTitulos[+ position], Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
-                    //TODO ver por qué no va
-                    //intent.putExtra("titulo", finalTitulos[position]);
-                    startActivity(intent);
-
-                }
-            });
         }
     }
 

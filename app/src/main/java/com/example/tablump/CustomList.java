@@ -1,7 +1,14 @@
 package com.example.tablump;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 public class CustomList extends ArrayAdapter<String>{
 
@@ -76,6 +85,42 @@ public class CustomList extends ArrayAdapter<String>{
                     isLiked[position] = false;
                 }
                 else{
+
+                    //Se notifica al usuario
+                    tablumpDatabaseAdapter.insertNotification("like",titulo[position],tablumpDatabaseAdapter.getPost(titulo[position]).getUsuario(),username);
+
+                    ////////////////////////////////////////////////////////////////////////////
+
+
+                    // Notificación de like
+                    String title = titulo[position];
+                    Intent intent = new Intent(context, PostActivity.class);
+                    intent.putExtra("titulo", title);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, tablumpDatabaseAdapter.getPost(titulo[position]).getUsuario())
+                            .setSmallIcon(R.drawable.sobre)
+                            .setContentTitle("Un usuario ha dado like a tu post:")
+                            .setContentText(title)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            // Set the intent that will fire when the user taps the notification
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true);
+
+                    NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+
+                    // notificationId is a unique int for each notification that you must define
+                    int min = 1;
+                    int max = 10000;
+
+                    Random r = new Random();
+                    int i1 = r.nextInt(max - min + 1) + min;
+                    notificationManagerCompat.notify(1, builder.build());
+
+                    ////////////////////////////////////////////////////////////////////////////
+
                     tablumpDatabaseAdapter.insertLike(titulo[position], username);
                     likeButton.setImageResource(context.getResources().getIdentifier(context.getPackageName() + ":drawable/" + "like_lleno", null, null));
                     isLiked[position] = true;

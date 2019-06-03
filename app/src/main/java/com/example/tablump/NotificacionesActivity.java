@@ -66,7 +66,7 @@ public class NotificacionesActivity extends AppCompatActivity {
         notifications = tablumpDatabaseAdapter.getNotificationsFromUser(username);
 
 
-        if(notifications.length>0){
+        if(notifications != null && notifications.length>0){
 
             String[] tipos = new String[notifications.length];
             String[] titulos = new String[notifications.length];

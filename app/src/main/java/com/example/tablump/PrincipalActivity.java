@@ -1,9 +1,12 @@
 package com.example.tablump;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,6 +36,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private String username;
 
+    private SharedPreferences sp;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -61,20 +66,23 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        sp = getSharedPreferences("preferences",Context.MODE_PRIVATE);
 
         Intent intent = getIntent();
         username = intent.getStringExtra("usuario");
+
+        SharedPreferences.Editor editor = sp.edit();
+        if (sp.getString("username","").equals("")) {
+            editor.putString("username", username);
+            editor.commit();
+        }
+
+
 
         ////////////
         final TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
         //tablumpDatabaseAdapter.insertUser("mail","no", "con");
-        try {
-            //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();
-        }
-        catch(Exception e) {
-            Log.d("E","Usuario no existente");
-        }
 
 
 
@@ -90,10 +98,12 @@ public class PrincipalActivity extends AppCompatActivity {
 
         //showActionBar();
 
-        intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            buscar(query);
+        //Toast.makeText(PrincipalActivity.this, "1" + username, Toast.LENGTH_LONG).show();
+        Intent intent2 = getIntent();
+        if (Intent.ACTION_SEARCH.equals(intent2.getAction())) {
+            String query = intent2.getStringExtra(SearchManager.QUERY);
+            //Toast.makeText(PrincipalActivity.this, us, Toast.LENGTH_LONG).show();
+            buscar(query,sp.getString("username",""));
         }
 
 
@@ -113,7 +123,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         //Toast.makeText(PrincipalActivity.this, tab.getText(), Toast.LENGTH_LONG).show();
                         if(tab.getPosition() == 0){
                             posts = tablumpDatabaseAdapter.searchPosts("");
-                            if(posts.length>0){
+                            if(posts != null && posts.length>0){
                                 String[] titulos = new String[posts.length];
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
@@ -146,7 +156,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
                             posts = tablumpDatabaseAdapter.getPostsFromUser(username);
 
-                            if(posts.length>0){
+                            if(posts != null && posts.length>0){
                                 String[] titulos = new String[posts.length];
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
@@ -185,7 +195,7 @@ public class PrincipalActivity extends AppCompatActivity {
                                 for(int i = 0;i<likes.length;i++){
                                     posts[i] = tablumpDatabaseAdapter.getPost(likes[i].getTitulo());
                                 }
-                                if(posts.length>0){
+                                if(posts != null && posts.length>0){
                                     String[] titulos = new String[posts.length];
                                     String[] descripciones = new String[posts.length];
                                     String[] categorias = new String[posts.length];
@@ -221,7 +231,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
                             //TODO OTRO FILTRO
                             posts = tablumpDatabaseAdapter.getPostsFromCategory("anuncios");
-                            if(posts.length>0){
+                            if(posts != null && posts.length>0){
                                 String[] titulos = new String[posts.length];
                                 String[] descripciones = new String[posts.length];
                                 String[] categorias = new String[posts.length];
@@ -265,9 +275,8 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
         );
 
-        //TODO los posts se recogerán del SQLite
 
-        if(posts.length>0){
+        if(posts != null && posts.length>0){
             String[] titulos = new String[posts.length];
             String[] descripciones = new String[posts.length];
             String[] categorias = new String[posts.length];
@@ -287,7 +296,26 @@ public class PrincipalActivity extends AppCompatActivity {
             CustomList adapter = new CustomList(PrincipalActivity.this, titulos, descripciones, isLiked, username);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
-            final String[] finalTitulos = titulos;
+
+
+            NotificationManager notificationManager = (NotificationManager)
+                    this.getSystemService(Context.NOTIFICATION_SERVICE);
+            //Toast.makeText(this, sp.getString("username",""), Toast.LENGTH_LONG).show();
+            final String channelId = sp.getString("username","");
+            final CharSequence channelName = "name1";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel notificationChannel = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                notificationChannel = new NotificationChannel(channelId, channelName,
+                        importance);
+                notificationChannel.enableLights(true);
+                notificationChannel.setLightColor(Color.RED);
+                notificationChannel.enableVibration(true);
+                notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400,
+                        500, 400, 300, 200, 400});
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+
 //            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
 //            button.setFocusable(false);
 
@@ -300,7 +328,7 @@ public class PrincipalActivity extends AppCompatActivity {
 //                    Toast.makeText(PrincipalActivity.this, "You Clicked", Toast.LENGTH_SHORT).show();
 //
 //                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
-//                    //TODO ver por qué no va
+//
 //                    //intent.putExtra("titulo", finalTitulos[position]);
 //                    startActivity(intent);
 //
@@ -355,10 +383,11 @@ public class PrincipalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void buscar(String query) {
+    private void buscar(String query, String user) {
         Intent intent = new Intent(getBaseContext(), SearchResultActivity.class);
         intent.putExtra("titulo", query);
-        intent.putExtra("usuario", username);
+        intent.putExtra("usuario", user);
+        //Toast.makeText(PrincipalActivity.this, user, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 

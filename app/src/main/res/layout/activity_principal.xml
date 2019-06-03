@@ -7,20 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".PrincipalActivity">
 
-    <!--<Button-->
-    <!--android:id="@+id/btn_ver_post"-->
-    <!--android:layout_width="226dp"-->
-    <!--android:layout_height="44dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--android:text="Ver post"-->
-    <!--android:textColor="@color/ic_launcher_background"-->
-    <!--android:textSize="18sp"-->
-    <!--app:layout_constraintBottom_toBottomOf="@+id/recyclerView"-->
-    <!--app:layout_constraintEnd_toEndOf="@+id/recyclerView"-->
-    <!--app:layout_constraintStart_toStartOf="@+id/recyclerView"-->
-    <!--app:layout_constraintTop_toTopOf="@+id/recyclerView" />-->
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
@@ -41,16 +27,6 @@
                 app:tabMinWidth="130dp" />
         </Toolbar>
     </android.support.design.widget.AppBarLayout>
-
-    <!--<TextView-->
-    <!--android:id="@+id/message"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="68dp"-->
-    <!--android:layout_marginTop="208dp"-->
-    <!--android:text="@string/title_home"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint"

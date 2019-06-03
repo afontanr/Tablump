@@ -51,7 +51,6 @@ public class SearchResultActivity extends AppCompatActivity {
             CustomList adapter = new CustomList(SearchResultActivity.this, titulos, descripciones, isLiked, username);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
-            final String[] finalTitulos = titulos;
         }
     }
 

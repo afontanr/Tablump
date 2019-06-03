@@ -14,7 +14,7 @@ public class TablumpDatabaseAdapter {
     public  static User getPassword=null;
     public static Post post;
     public static final int NAME_COLUMN = 1;
-    // TODO: Create public field for each column in your table.
+
     // SQL Statement to create a new database.
     static final String DATABASE_CREATE_USERS = "create table USER( ID integer primary key autoincrement,EMAIL text,USERNAME  text,PASSWORD text);";
     static final String DATABASE_CREATE_POSTS = "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";

@@ -91,7 +91,6 @@ public class CustomList extends ArrayAdapter<String>{
 
                     ////////////////////////////////////////////////////////////////////////////
 
-
                     // Notificación de like
                     String title = titulo[position];
                     Intent intent = new Intent(context, PostActivity.class);
@@ -111,13 +110,12 @@ public class CustomList extends ArrayAdapter<String>{
 
                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
 
-                    // notificationId is a unique int for each notification that you must define
                     int min = 1;
                     int max = 10000;
 
                     Random r = new Random();
                     int i1 = r.nextInt(max - min + 1) + min;
-                    notificationManagerCompat.notify(1, builder.build());
+                    notificationManagerCompat.notify(i1, builder.build());
 
                     ////////////////////////////////////////////////////////////////////////////
 
@@ -128,7 +126,6 @@ public class CustomList extends ArrayAdapter<String>{
 
             }
         });
-
 
         return rowView;
     }

@@ -44,29 +44,9 @@ public class LoginActivity extends AppCompatActivity {
 
         /*tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
         tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "no", "Paco");*/
+        */
 
         tablumpDatabaseAdapter.insertLike("Mochila perdida", "us");
-
-
-        try {
-            //Toast.makeText(getApplicationContext(), tablumpDatabaseAdapter.getUser("no").getEmail(), Toast.LENGTH_LONG).show();
-        }
-        catch(Exception e) {
-            Log.d("E","Usuario no existente");
-        }
 
         tablumpDatabaseAdapter.close();
 
@@ -74,8 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 //login()
                 TextView user = findViewById(R.id.usuario);
                 TextView password = findViewById(R.id.password);

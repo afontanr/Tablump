@@ -77,35 +77,20 @@ public class PrincipalActivity extends AppCompatActivity {
             editor.commit();
         }
 
-
-
-        ////////////
         final TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
-        //tablumpDatabaseAdapter.insertUser("mail","no", "con");
-
-
 
         posts = tablumpDatabaseAdapter.searchPosts("");
-        ///////////
 
-
-
-        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //navigation.setSelectedItemId();
 
-        //showActionBar();
-
-        //Toast.makeText(PrincipalActivity.this, "1" + username, Toast.LENGTH_LONG).show();
         Intent intent2 = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent2.getAction())) {
             String query = intent2.getStringExtra(SearchManager.QUERY);
             //Toast.makeText(PrincipalActivity.this, us, Toast.LENGTH_LONG).show();
             buscar(query,sp.getString("username",""));
         }
-
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("TODOS"));
@@ -115,12 +100,11 @@ public class PrincipalActivity extends AppCompatActivity {
         tabs.setTabTextColors(Color.WHITE, ContextCompat.getColor(getBaseContext(), R.color.colorSelectedText));
         tabs.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-
         tabs.addOnTabSelectedListener(
                 new TabLayout.OnTabSelectedListener() {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
-                        //Toast.makeText(PrincipalActivity.this, tab.getText(), Toast.LENGTH_LONG).show();
+                        //TODOS
                         if(tab.getPosition() == 0){
                             posts = tablumpDatabaseAdapter.searchPosts("");
                             if(posts != null && posts.length>0){
@@ -143,7 +127,6 @@ public class PrincipalActivity extends AppCompatActivity {
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
-                                final String[] finalTitulos = titulos;
 
                             }
                             else{
@@ -152,6 +135,7 @@ public class PrincipalActivity extends AppCompatActivity {
                                 //notifyDataSetChanged();
                             }
                         }
+                        //MIS POSTS
                         else if(tab.getPosition() == 1){
 
                             posts = tablumpDatabaseAdapter.getPostsFromUser(username);
@@ -176,7 +160,6 @@ public class PrincipalActivity extends AppCompatActivity {
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
-                                final String[] finalTitulos = titulos;
 
                             }
                             else{
@@ -185,7 +168,7 @@ public class PrincipalActivity extends AppCompatActivity {
                                 //notifyDataSetChanged();
                             }
                         }
-
+                        //FAVORITOS
                         else if(tab.getPosition() == 2){
 
                             //TODO FAVORITOS
@@ -215,7 +198,6 @@ public class PrincipalActivity extends AppCompatActivity {
                                     ListView listView = (ListView) findViewById(R.id.list);
                                     listView.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
-                                    final String[] finalTitulos = titulos;
 
                                 }
                             }
@@ -226,10 +208,9 @@ public class PrincipalActivity extends AppCompatActivity {
                                 //notifyDataSetChanged();
                             }
                         }
-
+                        //CATEGORÍA: ANUNCIOS
                         else if(tab.getPosition() == 3){
 
-                            //TODO OTRO FILTRO
                             posts = tablumpDatabaseAdapter.getPostsFromCategory("anuncios");
                             if(posts != null && posts.length>0){
                                 String[] titulos = new String[posts.length];
@@ -251,7 +232,6 @@ public class PrincipalActivity extends AppCompatActivity {
                                 ListView listView = (ListView) findViewById(R.id.list);
                                 listView.setAdapter(adapter);
                                 adapter.notifyDataSetChanged();
-                                final String[] finalTitulos = titulos;
 
                             }
                             else{
@@ -315,32 +295,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         500, 400, 300, 200, 400});
                 notificationManager.createNotificationChannel(notificationChannel);
             }
-
-//            ImageButton button = (ImageButton) listView.findViewById(R.id.like);
-//            button.setFocusable(false);
-
-
-//            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view,
-//                                        int position, long id) {
-//                    Toast.makeText(PrincipalActivity.this, "You Clicked", Toast.LENGTH_SHORT).show();
-//
-//                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
-//
-//                    //intent.putExtra("titulo", finalTitulos[position]);
-//                    startActivity(intent);
-//
-//                }
-//            });
         }
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 
     @Override
@@ -390,19 +345,5 @@ public class PrincipalActivity extends AppCompatActivity {
         //Toast.makeText(PrincipalActivity.this, user, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
-
-//    private void showActionBar() {
-//        LayoutInflater inflator = (LayoutInflater) this
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View v = inflator.inflate(R.layout.action_bar_custom, null);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(false);
-//        actionBar.setDisplayShowHomeEnabled (false);
-//        actionBar.setDisplayShowCustomEnabled(true);
-//        actionBar.setDisplayShowTitleEnabled(true);
-//        //actionBar.setTitle("");
-//        actionBar.setTitle("Tablump");
-//        actionBar.setCustomView(v);
-//    }
 
 }

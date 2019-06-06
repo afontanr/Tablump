@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         getBaseContext().deleteDatabase("database.db");
         tablumpDatabaseAdapter=new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();
-        tablumpDatabaseAdapter.insertUser("mail","us", "con");
+        tablumpDatabaseAdapter.insertUser("mail@mail.com","us", "con");
         tablumpDatabaseAdapter.insertPost("Fiesta de las paellas", "Este viernes se celebra la fiesta de las paellas","anuncios", "us");
         tablumpDatabaseAdapter.insertPost("Mochila perdida", "Se ha encontrado una mochila sin mochilero que la cargue en el bloque 3","objetos perdidos", "Paco");
         tablumpDatabaseAdapter.insertPost("Fin de las clases", "El último día de clases será el 27 de mayo","anuncios", "Alba");

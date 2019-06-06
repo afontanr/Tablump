@@ -86,11 +86,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.086"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_post_titulo"
+                app:layout_constraintTop_toBottomOf="@+id/id_perfil_nombre"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/id_post_titulo"
+                android:id="@+id/id_perfil_nombre"
                 android:layout_width="267dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"

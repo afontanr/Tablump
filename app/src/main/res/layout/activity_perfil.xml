@@ -35,14 +35,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/id_post_titulo"
+                android:id="@+id/id_perfil_nombre"
                 android:layout_width="267dp"
                 android:layout_height="63dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Username"
                 android:textColor="@android:color/background_light"
                 android:textSize="36sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -67,23 +66,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.068"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/id_post_titulo"
+                app:layout_constraintTop_toBottomOf="@+id/id_perfil_nombre"
                 app:layout_constraintVertical_bias="0.0" />
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ListView
+        android:id="@+id/id_perfil_posts"
+        android:layout_width="390dp"
+        android:layout_height="329dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Posts del usuario"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

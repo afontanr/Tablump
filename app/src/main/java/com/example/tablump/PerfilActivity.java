@@ -1,6 +1,8 @@
 package com.example.tablump;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +10,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class PerfilActivity extends AppCompatActivity {
 
+    private TextView mTextMessage;
+
+    private Post [] posts;
+
     private String username;
+
+    private String email;
+
+    private SharedPreferences sp;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,8 +58,47 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
 
+        sp = getSharedPreferences("preferences", Context.MODE_PRIVATE);
+
+
+
         Intent intent = getIntent();
-        username = intent.getStringExtra("usuario");
+        username = sp.getString("username","");
+
+        final TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
+        tablumpDatabaseAdapter.open();
+
+        email = tablumpDatabaseAdapter.getUser(username).getEmail();
+
+        TextView u = findViewById(R.id.id_perfil_nombre);
+        TextView e = findViewById(R.id.id__perfil_email);
+
+        u.setText(username);
+        e.setText(email);
+
+        posts = tablumpDatabaseAdapter.getPostsFromUser(username);
+
+        if(posts != null && posts.length>0){
+            String[] titulos = new String[posts.length];
+            String[] descripciones = new String[posts.length];
+            String[] categorias = new String[posts.length];
+            String[] usuarios = new String[posts.length];
+            Boolean[] isLiked = new Boolean[posts.length];
+
+            for(int i = 0; i<posts.length;i++){
+                titulos[i] = posts[i].getTitulo();
+                descripciones[i] = posts[i].getDescripcion();
+                categorias[i] = posts[i].getCategory();
+                usuarios[i] = posts[i].getUsuario();
+
+
+                isLiked[i]= tablumpDatabaseAdapter.getLikePostUser(posts[i].getTitulo(),username);
+            }
+
+            CustomList adapter = new CustomList(PerfilActivity.this, titulos, descripciones, isLiked, username);
+            ListView listView = (ListView) findViewById(R.id.id_perfil_posts);
+            listView.setAdapter(adapter);
+        }
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

@@ -113,7 +113,7 @@ public class TablumpDatabaseAdapter {
             db = dbHelper.getWritableDatabase();
             long result=db.insert("POST", null, newValues);
             System.out.print(result);
-            //Toast.makeText(context, "Post creado", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Post creado"+title+description+category+user, Toast.LENGTH_LONG).show();
         }catch(Exception ex) {
             System.out.println("Exceptions " +ex);
             Log.e("Note", "One row entered");

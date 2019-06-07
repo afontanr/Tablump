@@ -68,14 +68,14 @@
 
 
         <Spinner
-            android:layout_marginTop="15dp"
             android:id="@+id/spinner"
-            android:tag="Categoría"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
             android:entries="@array/spinner_categorias"
             android:prompt="@string/spinner_prompt"
-            android:layout_weight="1" />
+            android:tag="Categoría" />
 
         <Button
 

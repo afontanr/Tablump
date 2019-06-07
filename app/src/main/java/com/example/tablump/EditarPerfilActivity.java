@@ -28,10 +28,10 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
                 if(user.getText().toString().equals("") || pass.getText().toString().equals("") || mail.getText().toString().equals("")){
                     tablumpDatabaseAdapter.close();
-                    Toast.makeText(getApplicationContext(), "No se han introducido todos los cambios", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se han introducido todos los campos", Toast.LENGTH_LONG).show();
                 }
 
-                if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null || user.getText().toString().equals(username)){
+                else if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null || user.getText().toString().equals(username)){
                     tablumpDatabaseAdapter.deleteUser(username);
                     tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
                     tablumpDatabaseAdapter.close();

@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +22,16 @@ public class RegisterActivity extends AppCompatActivity {
                 TextView user = findViewById(R.id.registro_usuario);
                 TextView pass = findViewById(R.id.registro_contraseña);
                 TextView mail = findViewById(R.id.registro_correo);
+
+                Toast.makeText(getApplicationContext(), mail.getText().toString(), Toast.LENGTH_LONG).show();
+
                 TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
                 tablumpDatabaseAdapter.open();
-                if(tablumpDatabaseAdapter.getUser(user.toString()) == null){
-                    tablumpDatabaseAdapter.insertUser(mail.toString(),user.toString(),pass.toString());
+                if( !user.getText().toString().equals("") && !pass.getText().toString().equals("") && !mail.getText().toString().equals("") && tablumpDatabaseAdapter.getUser(user.getText().toString()) == null){
+                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
                     tablumpDatabaseAdapter.close();
                     Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
-                    username = intent.getStringExtra("usuario");
-                    intent.putExtra("usuario", username);
+                    intent.putExtra("usuario", user.getText().toString());
                     startActivity(intent);
                 }else{
                     tablumpDatabaseAdapter.close();

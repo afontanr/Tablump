@@ -71,7 +71,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         email = tablumpDatabaseAdapter.getUser(username).getEmail();
 
-        TextView u = findViewById(R.id.id_perfil_nombre);
+        TextView u = findViewById(R.id.id_post_title);
         TextView e = findViewById(R.id.id__perfil_email);
 
         u.setText(username);
@@ -106,7 +106,7 @@ public class PerfilActivity extends AppCompatActivity {
         navigation.getMenu().getItem(0).setCheckable(false);
     }
 
-/*
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -114,7 +114,7 @@ public class PerfilActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.btn_edit_profile);
         return super.onCreateOptionsMenu(menu);
     }
-*/
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

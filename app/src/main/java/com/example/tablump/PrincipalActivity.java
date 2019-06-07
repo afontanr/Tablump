@@ -89,6 +89,7 @@ public class PrincipalActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent2.getAction())) {
             String query = intent2.getStringExtra(SearchManager.QUERY);
             //Toast.makeText(PrincipalActivity.this, us, Toast.LENGTH_LONG).show();
+            tablumpDatabaseAdapter.close();
             buscar(query,sp.getString("username",""));
         }
 

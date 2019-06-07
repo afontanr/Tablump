@@ -23,8 +23,6 @@ public class RegisterActivity extends AppCompatActivity {
                 TextView pass = findViewById(R.id.registro_contraseña);
                 TextView mail = findViewById(R.id.registro_correo);
 
-                Toast.makeText(getApplicationContext(), mail.getText().toString(), Toast.LENGTH_LONG).show();
-
                 TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
                 tablumpDatabaseAdapter.open();
                 if( !user.getText().toString().equals("") && !pass.getText().toString().equals("") && !mail.getText().toString().equals("") && tablumpDatabaseAdapter.getUser(user.getText().toString()) == null){
@@ -33,9 +31,13 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
                     intent.putExtra("usuario", user.getText().toString());
                     startActivity(intent);
-                }else{
+                }else if (!user.getText().toString().equals("") && !pass.getText().toString().equals("") && !mail.getText().toString().equals("")){
                     tablumpDatabaseAdapter.close();
                     Toast.makeText(getApplicationContext(), "Usuario Existente", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    tablumpDatabaseAdapter.close();
+                    Toast.makeText(getApplicationContext(), "No se han introducido todos los campos", Toast.LENGTH_LONG).show();
                 }
 
             }

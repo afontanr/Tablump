@@ -346,7 +346,7 @@ public class TablumpDatabaseAdapter {
             db = dbHelper.getWritableDatabase();
             long result=db.insert("COMMENTS", null, newValues);
             System.out.print(result);
-            //Toast.makeText(context, "Usuario creado", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Comentario creado en" + title, Toast.LENGTH_LONG).show();
         }catch(Exception ex) {
             System.out.println("Exceptions " +ex);
             Log.e("Note", "One row entered");

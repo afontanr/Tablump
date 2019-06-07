@@ -40,17 +40,17 @@ public class PostActivity extends AppCompatActivity {
         post = tablumpDatabaseAdapter.getPost(title);
         postOwner=post.getUsuario();
 
-        TextView title = findViewById(R.id.id_post_title);
+        final TextView title2 = findViewById(R.id.id_post_title);
         TextView username = findViewById(R.id.id_post_username);
         TextView contenido = findViewById(R.id.id_post_contenido);
         TextView tema = findViewById(R.id.id_post_tema);
 
-        title.setText(post.getTitulo());
+        title2.setText(post.getTitulo());
         username.setText(post.getUsuario());
         contenido.setText(post.getDescripcion());
         tema.setText(post.getCategory());
 
-        comments = tablumpDatabaseAdapter.getCommentFromTitle(this.title);
+        comments = tablumpDatabaseAdapter.getCommentFromTitle(title);
 
         if(comments != null && comments.length>0){
             String[] titles = new String[comments.length];
@@ -73,8 +73,9 @@ public class PostActivity extends AppCompatActivity {
         addComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent intent = new Intent(this, ComentarPostActivity.class);
-                // startActivity(intent);
+                 Intent intent = new Intent(getBaseContext(), AddCommentActivity.class);
+                 intent.putExtra("title", title);
+                 startActivity(intent);
             }
         });
 

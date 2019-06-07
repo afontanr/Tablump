@@ -15,7 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EditarPostActivity"
+        <activity android:name=".AddCommentActivity"
+            android:label="@string/action_comentar"
+            android:parentActivityName=".PostActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tablump.PrincipalActivity" />
+        </activity>
+        <activity
+            android:name=".EditarPostActivity"
             android:label="@string/title_edit_post"
             android:parentActivityName=".PostActivity">
             <meta-data

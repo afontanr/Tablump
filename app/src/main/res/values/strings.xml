@@ -49,6 +49,7 @@
         <item>Categoría 5</item>
         <item>Categoría 6</item>
     </string-array>
+    <string name="action_comentar">Comentar</string>
 
 
 </resources>

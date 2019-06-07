@@ -33,6 +33,7 @@ public class PerfilActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
+                    intent.putExtra("usuario", username);
                     startActivity(intent);
 
                     return true;
@@ -105,7 +106,7 @@ public class PerfilActivity extends AppCompatActivity {
         navigation.getMenu().getItem(0).setCheckable(false);
     }
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -113,7 +114,7 @@ public class PerfilActivity extends AppCompatActivity {
         MenuItem searchItem = menu.findItem(R.id.btn_edit_profile);
         return super.onCreateOptionsMenu(menu);
     }
-
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

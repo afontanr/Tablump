@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "us", "Paco");
         tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "us", "Paco");
 
+        tablumpDatabaseAdapter.insertComment("Mochila perdida","Alba","La he encontraado");
 
         tablumpDatabaseAdapter.insertLike("Mochila perdida", "us");
 

@@ -17,6 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_POSTS);
             _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_NOTIFICATIONS);
             _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_LIKES);
+            _db.execSQL(TablumpDatabaseAdapter.DATABASE_CREATE_COMENTARIOS);
         }catch(Exception er){
             Log.e("Error","exception");
         }
@@ -36,6 +37,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         _db.execSQL("DROP TABLE IF EXISTS " + "POST");
         _db.execSQL("DROP TABLE IF EXISTS " + "NOTIFICATION");
         _db.execSQL("DROP TABLE IF EXISTS " + "LIKEUSER");
+        _db.execSQL("DROP TABLE IF EXISTS " + "COMMENTS");
 
         // Create a new one.
         onCreate(_db);

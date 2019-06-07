@@ -20,6 +20,7 @@ public class TablumpDatabaseAdapter {
     static final String DATABASE_CREATE_POSTS = "create table POST( ID integer primary key autoincrement,TITLE  text,DESCRIPTION text,CATEGORY text, USER text);";
     static final String DATABASE_CREATE_NOTIFICATIONS = "create table NOTIFICATION( ID integer primary key autoincrement,TYPE text, TITLE  text,USERRECEIVE text,USERMAKE text);";
     static final String DATABASE_CREATE_LIKES = "create table LIKEUSER( ID integer primary key autoincrement,TITLE text, USER  text);";
+    static final String DATABASE_CREATE_COMENTARIOS = "create table COMMENTS( ID integer primary key autoincrement,TITLE text, USER  text, COMMENT text);";
     // Variable to hold the database instance
     public static SQLiteDatabase db;
     // Context of the application using the database.
@@ -330,6 +331,45 @@ public class TablumpDatabaseAdapter {
         int numberOFEntriesDeleted= db.delete("LIKEUSER", where, new String[]{title,user}) ;
         //Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
         return numberOFEntriesDeleted;
+    }
+
+    // method to insert a record in Table
+    public String insertComment(String title, String username,String content)
+    {
+        try {
+            ContentValues newValues = new ContentValues();
+            // Assign values for each column.
+            newValues.put("TITLE", title);
+            newValues.put("USER", username);
+            newValues.put("COMMENT", content);
+            // Insert the row into your table
+            db = dbHelper.getWritableDatabase();
+            long result=db.insert("COMMENTS", null, newValues);
+            System.out.print(result);
+            //Toast.makeText(context, "Usuario creado", Toast.LENGTH_LONG).show();
+        }catch(Exception ex) {
+            System.out.println("Exceptions " +ex);
+            Log.e("Note", "One row entered");
+        }
+        return ok;
+    }
+
+    public Comment [] getCommentFromTitle(String title) {
+        db=dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(true, "COMMENTS",
+                new String[] {"ID","TITLE","USER","COMMENT"},
+                "TITLE" + " LIKE ?",
+                new String[] { "%" + title + "%" },
+                null, null, null, null);
+        if(cursor.getCount()<1) // UserName Not Exist
+            return null;
+        cursor.moveToFirst();
+        Comment[] comments = new Comment[cursor.getCount()];
+        for(int i=0;i<cursor.getCount();i++){
+            comments[i] = new Comment(cursor.getString(cursor.getColumnIndex("TITLE")), cursor.getString(cursor.getColumnIndex("USER")),cursor.getString(cursor.getColumnIndex("COMMENT")));
+            cursor.moveToNext();
+        }
+        return comments;
     }
 
 

@@ -72,7 +72,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/id_perfil_posts"
+        android:id="@+id/id_post_comments"
         android:layout_width="390dp"
         android:layout_height="329dp"
         android:layout_marginStart="8dp"

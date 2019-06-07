@@ -3,8 +3,6 @@ package com.example.tablump;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class PostActivity extends AppCompatActivity {
@@ -21,6 +19,7 @@ public class PostActivity extends AppCompatActivity {
     private String username;
     private String postOwner;
     private Post post;
+    private Comment [] comments;
     private SharedPreferences sp;
 
 
@@ -29,7 +28,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         final TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
-
+        tablumpDatabaseAdapter.open();
 
         sp = getSharedPreferences("preferences", Context.MODE_PRIVATE);
 
@@ -50,6 +49,25 @@ public class PostActivity extends AppCompatActivity {
         username.setText(post.getUsuario());
         contenido.setText(post.getDescripcion());
         tema.setText(post.getCategory());
+
+        comments = tablumpDatabaseAdapter.getCommentFromTitle(this.title);
+
+        if(comments != null && comments.length>0){
+            String[] titles = new String[comments.length];
+            String[] users = new String[comments.length];
+            String[] coms = new String[comments.length];
+
+            for(int i = 0; i<comments.length;i++){
+                titles[i] = comments[i].getTitle();
+                users[i] = comments[i].getUser();
+                coms[i] = comments[i].getContent();
+            }
+
+            CustomListComentarios adapter = new CustomListComentarios(PostActivity.this, users, coms);
+            ListView listView = (ListView) findViewById(R.id.id_post_comments);
+            listView.setAdapter(adapter);
+        }
+
 
         FloatingActionButton addComment = findViewById(R.id.id_add_comment);
         addComment.setOnClickListener(new View.OnClickListener() {

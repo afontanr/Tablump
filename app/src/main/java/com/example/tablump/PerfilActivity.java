@@ -97,7 +97,7 @@ public class PerfilActivity extends AppCompatActivity {
             }
 
             CustomList adapter = new CustomList(PerfilActivity.this, titulos, descripciones, isLiked, username);
-            ListView listView = (ListView) findViewById(R.id.id_perfil_posts);
+            ListView listView = (ListView) findViewById(R.id.id_post_comments);
             listView.setAdapter(adapter);
         }
 

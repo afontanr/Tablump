@@ -25,13 +25,19 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 TextView mail = findViewById(R.id.editarperfil_correo);
                 TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
                 tablumpDatabaseAdapter.open();
-                if(tablumpDatabaseAdapter.getUser(user.toString()) == null || user.toString().equals(username)){
+
+                if(user.getText().toString().equals("") || pass.getText().toString().equals("") || mail.getText().toString().equals("")){
+                    tablumpDatabaseAdapter.close();
+                    Toast.makeText(getApplicationContext(), "No se han introducido todos los cambios", Toast.LENGTH_LONG).show();
+                }
+
+                if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null || user.getText().toString().equals(username)){
                     tablumpDatabaseAdapter.deleteUser(username);
-                    tablumpDatabaseAdapter.insertUser(mail.toString(),user.toString(),pass.toString());
+                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
                     tablumpDatabaseAdapter.close();
                     Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
-                    username = user.toString();
-                    intent.putExtra("usuario", username);
+
+                    intent.putExtra("usuario", user.getText().toString());
                     startActivity(intent);
                 }else{
                     tablumpDatabaseAdapter.close();

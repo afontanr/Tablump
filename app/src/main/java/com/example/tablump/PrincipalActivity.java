@@ -72,10 +72,10 @@ public class PrincipalActivity extends AppCompatActivity {
         username = intent.getStringExtra("usuario");
 
         SharedPreferences.Editor editor = sp.edit();
-        if (sp.getString("username","").equals("")) {
+        //if (sp.getString("username","").equals("")) {
             editor.putString("username", username);
             editor.commit();
-        }
+        //}
 
         final TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
         tablumpDatabaseAdapter.open();

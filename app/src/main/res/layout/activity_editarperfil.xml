@@ -25,24 +25,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <AutoCompleteTextView
-        android:id="@+id/editarperfil_contraseña"
-        android:layout_width="359dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="346dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="347dp"
-        android:hint="@string/prompt_usuario"
-        android:inputType="text"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:text="@string/prompt_password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <AutoCompleteTextView
         android:id="@+id/editarperfil_correo"
         android:layout_width="359dp"
         android:layout_height="38dp"
@@ -50,11 +32,27 @@
         android:layout_marginTop="255dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="438dp"
-        android:hint="@string/prompt_usuario"
+        android:hint="@string/prompt_email"
         android:inputType="text"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="@string/prompt_email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/editarperfil_contraseña"
+        android:layout_width="359dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="346dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="347dp"
+        android:hint="@string/prompt_password"
+        android:inputType="text"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +70,6 @@
         android:inputType="text"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="@string/prompt_usuario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

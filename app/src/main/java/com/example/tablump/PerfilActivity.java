@@ -126,9 +126,18 @@ public class PerfilActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
+            case android.R.id.home:
+                onBackPressed();
+                return true;
 
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        intent.putExtra("usuario", username);
+        startActivity(intent);
     }
 }

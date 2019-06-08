@@ -80,6 +80,12 @@ public class NotificacionesActivity extends AppCompatActivity {
                 usuariosRealiza[i] = notifications[i].getUsuarioRealiza();
             }
 
+            tipos = invertir(tipos);
+            titulos = invertir(titulos);
+            usuariosRecibe = invertir(usuariosRecibe);
+            usuariosRealiza = invertir(usuariosRealiza);
+
+
             CustomListNotificaciones adapter = new CustomListNotificaciones(NotificacionesActivity.this, tipos, titulos, usuariosRecibe, usuariosRealiza);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
@@ -171,5 +177,14 @@ public class NotificacionesActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    String [] invertir(String[] array) {
+        for (int i = 0; i < array.length / 2; i++) {
+            String temp = array[i];
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = temp;
+        }
+        return array;
     }
 }

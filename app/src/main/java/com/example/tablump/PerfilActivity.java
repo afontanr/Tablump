@@ -43,6 +43,9 @@ public class PerfilActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_logout:
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("username", "");
+                    editor.commit();
                     Intent intent2 = new Intent(getBaseContext(), LoginActivity.class);
                     startActivity(intent2);
                     finish();

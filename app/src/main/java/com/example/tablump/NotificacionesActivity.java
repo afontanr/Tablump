@@ -34,6 +34,7 @@ public class NotificacionesActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     item.setCheckable(true);
                     Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
+                    intent.putExtra("usuario", username);
                     startActivity(intent);
                     //mTextMessage.setText(R.string.title_home);
                     return true;

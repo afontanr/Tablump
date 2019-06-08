@@ -66,7 +66,7 @@ public class AddCommentActivity extends AppCompatActivity {
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), userPost)
                             .setSmallIcon(R.drawable.sobre)
                             .setContentTitle(username+" ha comentado en tu post:")
-                            .setContentText(title)
+                            .setContentText(title).setChannelId(userPost)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             // Set the intent that will fire when the user taps the notification
                             .setContentIntent(pendingIntent)

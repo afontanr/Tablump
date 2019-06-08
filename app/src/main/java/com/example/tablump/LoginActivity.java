@@ -33,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         tablumpDatabaseAdapter.insertPost("He perdido un reloj", "He perdido un reloj de pulsera y ahora no sé qué hora es, ¿alguien lo ha visto?","objetos perdidos", "Gonzalo");
         tablumpDatabaseAdapter.insertPost("¿Cuándo terminan las clases?", "¿Terminan esta semana o la que viene?","dudas", "Paco");
 
-        tablumpDatabaseAdapter.insertNotification("like", "Este viernes se celebra la fiesta de las paellas", "us", "Paco");
-        tablumpDatabaseAdapter.insertNotification("comment", "Este viernes se celebra la fiesta de las paellas", "us", "Paco");
+        tablumpDatabaseAdapter.insertNotification("like", "Fiesta de las paellas", "us", "Ramón");
+        tablumpDatabaseAdapter.insertNotification("comment", "Fiesta de las paellas", "us", "Ramón");
 
         tablumpDatabaseAdapter.insertComment("Mochila perdida","Alba","La he encontraado");
 

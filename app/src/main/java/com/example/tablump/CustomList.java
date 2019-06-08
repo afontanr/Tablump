@@ -57,7 +57,7 @@ public class CustomList extends ArrayAdapter<String>{
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Pulsado en el post " + titulo[position], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Pulsado en el post " + titulo[position], Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(), PostActivity.class);
 
                 intent.putExtra("titulo", titulo[position]);
@@ -103,6 +103,7 @@ public class CustomList extends ArrayAdapter<String>{
                             .setSmallIcon(R.drawable.sobre)
                             .setContentTitle("Un usuario ha dado like a tu post:")
                             .setContentText(title)
+                            .setChannelId(tablumpDatabaseAdapter.getPost(titulo[position]).getUsuario())
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             // Set the intent that will fire when the user taps the notification
                             .setContentIntent(pendingIntent)

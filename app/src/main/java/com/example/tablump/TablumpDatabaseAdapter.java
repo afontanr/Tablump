@@ -89,13 +89,14 @@ public class TablumpDatabaseAdapter {
         return getPassword;
     }
     // Method to Update an Existing username password
-    public void  updateUser(String userName,String password)
+    public void  updateUser(String userName,String password,String email)
     {
         //  create object of ContentValues
         ContentValues updatedValues = new ContentValues();
         // Assign values for each Column.
         updatedValues.put("USERNAME", userName);
         updatedValues.put("PASSWORD", password);
+        updatedValues.put("EMAIL", email);
         String where="USERNAME = ?";
         db.update("USER",updatedValues, where, new String[]{userName});
     }
@@ -255,7 +256,18 @@ public class TablumpDatabaseAdapter {
         }
         return ok;
     }
-
+    public void  updateNotification(String type,String title, String userReceive, String userMake)
+    {
+        //  create object of ContentValues
+        ContentValues updatedValues = new ContentValues();
+        // Assign values for each Column.
+        updatedValues.put("TYPE", type);
+        updatedValues.put("TITLE", title);
+        updatedValues.put("USERRECEIVE", userReceive);
+        updatedValues.put("USERMAKE", userMake);
+        String where="TYPE = ?";
+        db.update("NOTIFICATION",updatedValues, where, new String[]{type});
+    }
     public Like [] getLikesFromUser(String user)
     {
         db=dbHelper.getReadableDatabase();
@@ -332,7 +344,16 @@ public class TablumpDatabaseAdapter {
         //Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
         return numberOFEntriesDeleted;
     }
-
+    public void  updateLike(String title,String user)
+    {
+        //  create object of ContentValues
+        ContentValues updatedValues = new ContentValues();
+        // Assign values for each Column.
+        updatedValues.put("TITLE", title);
+        updatedValues.put("USER", user);
+        String where="TITLE = ?";
+        db.update("LIKEUSER",updatedValues, where, new String[]{title});
+    }
     // method to insert a record in Table
     public String insertComment(String title, String username,String content)
     {

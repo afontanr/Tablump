@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class EditarPerfilActivity extends AppCompatActivity {
 
     private String username;
@@ -32,8 +33,19 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 }
 
                 else if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null || user.getText().toString().equals(username)){
-                    tablumpDatabaseAdapter.deleteUser(username);
-                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
+                    Like [] likes = tablumpDatabaseAdapter.getLikesFromUser(username);
+                    Post [] posts = tablumpDatabaseAdapter.getPostsFromUser(username);
+                    Notification [] notificaciones = tablumpDatabaseAdapter.getNotificationsFromUser(username);
+                    for(int i = 0; i < likes.length;i++){
+                        tablumpDatabaseAdapter.updateLike(likes[i].getTitulo(),user.toString());
+                    }
+                    for(int i = 0; i < posts.length;i++){
+                        tablumpDatabaseAdapter.updatePost(posts[i].getTitulo(),posts[i].getDescripcion(),posts[i].getCategory(),user.toString());
+                    }
+                    for(int i = 0; i < notificaciones.length;i++){
+                        tablumpDatabaseAdapter.updateNotification(notificaciones[i].getTipo(),notificaciones[i].getTitulo(),user.toString(),notificaciones[i].getUsuarioRealiza());
+                    }
+                    tablumpDatabaseAdapter.updateUser(user.toString(),pass.toString(),mail.toString());
                     tablumpDatabaseAdapter.close();
                     Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
 

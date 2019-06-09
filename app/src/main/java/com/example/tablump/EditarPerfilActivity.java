@@ -37,7 +37,8 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "No se han introducido todos los campos", Toast.LENGTH_LONG).show();
                 }
 
-                else if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null || user.getText().toString().equals(username)){
+                else if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null && !user.getText().toString().equals(username)){
+
                     Like [] likes = tablumpDatabaseAdapter.getLikesFromUser(username);
                     Post [] posts = tablumpDatabaseAdapter.getPostsFromUser(username);
                     Notification [] notificaciones = tablumpDatabaseAdapter.getNotificationsFromUser(username);

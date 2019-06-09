@@ -1,5 +1,6 @@
 package com.example.tablump;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,6 +44,20 @@ public class PerfilActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_logout:
+
+                    NotificationManager notificationManager = (NotificationManager)
+                            getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.deleteNotificationChannel(username);
+
+                    //Sólo para la prueba
+                    notificationManager.deleteNotificationChannel("Alba");
+                    notificationManager.deleteNotificationChannel("Paco");
+                    notificationManager.deleteNotificationChannel("Ramón");
+                    notificationManager.deleteNotificationChannel("us");
+                    notificationManager.deleteNotificationChannel("Roberto");
+                    notificationManager.deleteNotificationChannel("Gonzalo");
+                    //////////////////
+
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("username", "");
                     editor.commit();

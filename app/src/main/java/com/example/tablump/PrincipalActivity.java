@@ -283,7 +283,7 @@ public class PrincipalActivity extends AppCompatActivity {
                     this.getSystemService(Context.NOTIFICATION_SERVICE);
             //Toast.makeText(this, sp.getString("username",""), Toast.LENGTH_LONG).show();
             final String channelId = sp.getString("username","");
-            final CharSequence channelName = "name1";
+            final CharSequence channelName = username;
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel notificationChannel = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

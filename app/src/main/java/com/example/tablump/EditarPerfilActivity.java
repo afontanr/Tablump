@@ -42,7 +42,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     Post [] posts = tablumpDatabaseAdapter.getPostsFromUser(username);
                     Notification [] notificaciones = tablumpDatabaseAdapter.getNotificationsFromUser(username);
                     tablumpDatabaseAdapter.deleteUser(username);
-                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),pass.getText().toString(),mail.getText().toString());
+                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
                     //tablumpDatabaseAdapter.updateUser(user.getText().toString(),pass.getText().toString(),mail.getText().toString());
                     if(likes!= null) {
                         for (int i = 0; i < likes.length; i++) {
@@ -66,7 +66,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     editor.putString("username", user.getText().toString());
                     editor.commit();
 
-                    intent.putExtra("username", username);
+                    intent.putExtra("username", user.getText().toString());
                     startActivity(intent);
                 }else{
                     tablumpDatabaseAdapter.close();

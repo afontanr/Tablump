@@ -143,17 +143,17 @@ public class TablumpDatabaseAdapter {
     }
 
     // Method to Update an Existing
-    public void  updatePost(String title,String description, String category, String user)
+    public void  updatePost(String oldTitle,String newTitle,String description, String category, String user)
     {
         //  create object of ContentValues
         ContentValues updatedValues = new ContentValues();
         // Assign values for each Column.
-        updatedValues.put("TITLE", title);
+        updatedValues.put("TITLE", newTitle);
         updatedValues.put("DESCRIPTION", description);
         updatedValues.put("CATEGORY", category);
         updatedValues.put("USER", user);
         String where="TITLE = ?";
-        db.update("POST",updatedValues, where, new String[]{title});
+        db.update("POST",updatedValues, where, new String[]{oldTitle});
     }
 
     // Method to get all posts with a title like the search parameter

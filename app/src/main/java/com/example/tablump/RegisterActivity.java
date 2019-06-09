@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
                     tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
                     tablumpDatabaseAdapter.close();
                     Intent intent = new Intent(getBaseContext(), PrincipalActivity.class);
-                    intent.putExtra("usuario", user.getText().toString());
+                    intent.putExtra("username", user.getText().toString());
                     startActivity(intent);
                 }else if (!user.getText().toString().equals("") && !pass.getText().toString().equals("") && !mail.getText().toString().equals("")){
                     tablumpDatabaseAdapter.close();

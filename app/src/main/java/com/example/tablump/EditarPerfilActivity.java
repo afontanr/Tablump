@@ -41,30 +41,32 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     Like [] likes = tablumpDatabaseAdapter.getLikesFromUser(username);
                     Post [] posts = tablumpDatabaseAdapter.getPostsFromUser(username);
                     Notification [] notificaciones = tablumpDatabaseAdapter.getNotificationsFromUser(username);
+                    tablumpDatabaseAdapter.deleteUser(username);
+                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),pass.getText().toString(),mail.getText().toString());
+                    //tablumpDatabaseAdapter.updateUser(user.getText().toString(),pass.getText().toString(),mail.getText().toString());
                     if(likes!= null) {
                         for (int i = 0; i < likes.length; i++) {
-                            tablumpDatabaseAdapter.updateLike(likes[i].getTitulo(), user.toString());
+                            tablumpDatabaseAdapter.updateLike(likes[i].getTitulo().toString(), user.getText().toString());
                         }
                     }
                     if(posts!= null) {
                         for (int i = 0; i < posts.length; i++) {
-                            tablumpDatabaseAdapter.updatePost(posts[i].getTitulo(), posts[i].getDescripcion(), posts[i].getCategory(), user.toString());
+                            tablumpDatabaseAdapter.updatePost(posts[i].getTitulo().toString(),posts[i].getTitulo().toString(), posts[i].getDescripcion().toString(), posts[i].getCategory().toString(), user.getText().toString());
                         }
                     }
                     if(notificaciones!= null) {
                         for (int i = 0; i < notificaciones.length; i++) {
-                            tablumpDatabaseAdapter.updateNotification(notificaciones[i].getTipo(), notificaciones[i].getTitulo(), user.toString(), notificaciones[i].getUsuarioRealiza());
+                            tablumpDatabaseAdapter.updateNotification(notificaciones[i].getTipo().toString(), notificaciones[i].getTitulo().toString(), user.getText().toString(), notificaciones[i].getUsuarioRealiza().toString());
                         }
                     }
-                    tablumpDatabaseAdapter.updateUser(user.toString(),pass.toString(),mail.toString());
                     tablumpDatabaseAdapter.close();
                     Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
 
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("username", user.toString());
+                    editor.putString("username", user.getText().toString());
                     editor.commit();
 
-                    intent.putExtra("username", user.toString());
+                    intent.putExtra("username", username);
                     startActivity(intent);
                 }else{
                     tablumpDatabaseAdapter.close();

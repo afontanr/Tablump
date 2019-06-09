@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
+
 
 public class EditarPostActivity extends AppCompatActivity {
 
@@ -18,7 +18,8 @@ public class EditarPostActivity extends AppCompatActivity {
     private SharedPreferences sp;
     String title;
     String username;
-
+    private String preDesc, preCat;
+    private String newTit, newDesc, newCat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,36 +33,46 @@ public class EditarPostActivity extends AppCompatActivity {
                 TextView titulo = findViewById(R.id.txtTit);
                 TextView descripcion = findViewById(R.id.txtDesc);
                 spinner1 = findViewById(R.id.spinner);
+                newTit = titulo.getText().toString();
+                newDesc = descripcion.getText().toString();
+                newCat = spinner1.getSelectedItem().toString();
                 TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
                 tablumpDatabaseAdapter.open();
                 sp = getSharedPreferences("preferences", Context.MODE_PRIVATE);
                 title = intent1.getStringExtra("title");
                 username = sp.getString("username","");
-                Log.d("BLA",username);
-                if(titulo.getText().toString().equals("") || descripcion.getText().toString().equals("")){
+                preDesc = tablumpDatabaseAdapter.getPost(title).getDescripcion();
+                preCat = tablumpDatabaseAdapter.getPost(title).getCategory();
+                if(newTit.equals("") && newDesc.equals("") && preCat.equals(newCat)){
                     tablumpDatabaseAdapter.close();
-                    Toast.makeText(getApplicationContext(), "No se han introducido todos los campos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se ha modificado nada", Toast.LENGTH_LONG).show();
                 }
 
                 else if(tablumpDatabaseAdapter.getPost(titulo.getText().toString()) == null || titulo.getText().toString().equals(title)){
-                    //tablumpDatabaseAdapter.deletePost(title);
-                    //tablumpDatabaseAdapter.insertPost(titulo.getText().toString(),descripcion.getText().toString(),spinner1.getSelectedItem().toString(),username);
+                    if(newTit.equals("")){
+                        newTit = title;
+                    }
+                    if(newDesc.equals("")){
+                        newDesc = preDesc;
+                    }
+                    if(newTit.equals("")){
+                        newCat = preCat;
+                    }
                     Comment[] comments = tablumpDatabaseAdapter.getCommentFromTitle(title);
                     if(comments != null){
                         for(int i = 0;i<comments.length;i++){
                             tablumpDatabaseAdapter.insertComment(titulo.getText().toString(),comments[i].getUser().toString(),comments[i].getContent().toString());
                         }
                     }
-                    tablumpDatabaseAdapter.updatePost(title,titulo.getText().toString(),descripcion.getText().toString(),spinner1.getSelectedItem().toString(),username);
+                    tablumpDatabaseAdapter.updatePost(title,newTit,newDesc,newCat,username);
                     tablumpDatabaseAdapter.close();
-                    Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
-                    intent.putExtra("titulo", title);
+                    Intent intent = new Intent(getBaseContext(), PostActivity.class);
+                    intent.putExtra("titulo", newTit);
                     startActivity(intent);
                 }else{
                     tablumpDatabaseAdapter.close();
                     Toast.makeText(getApplicationContext(), "Titulo ya escogido", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 

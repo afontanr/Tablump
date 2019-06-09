@@ -16,6 +16,8 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     private SharedPreferences sp;
     private String username;
+    private String prePass, preMail;
+    private String newUser, newMail, newPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,44 +30,56 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 TextView user = findViewById(R.id.editarperfil_usuario);
                 TextView pass = findViewById(R.id.editarperfil_contraseña);
                 TextView mail = findViewById(R.id.editarperfil_correo);
+                newUser = user.getText().toString();
+                newMail = mail.getText().toString();
+                newPass = pass.getText().toString();
                 TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
                 tablumpDatabaseAdapter.open();
                 sp = getSharedPreferences("preferences", Context.MODE_PRIVATE);
                 username = sp.getString("username","");
+                prePass = tablumpDatabaseAdapter.getUser(username).getPassword();
+                preMail = tablumpDatabaseAdapter.getUser(username).getEmail();
 
-                if(user.getText().toString().equals("") || pass.getText().toString().equals("") || mail.getText().toString().equals("")){
+                if(newUser.equals("") && newPass.equals("") && newMail.equals("")){
                     tablumpDatabaseAdapter.close();
-                    Toast.makeText(getApplicationContext(), "No se han introducido todos los campos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "No se ha realizado ningun cambio", Toast.LENGTH_LONG).show();
                 }
 
                 else if(tablumpDatabaseAdapter.getUser(user.getText().toString()) == null && !user.getText().toString().equals(username)){
-
+                    if(newUser.equals("")){
+                        newUser = username;
+                    }
+                    if(newPass.equals("")){
+                        newPass = prePass;
+                    }
+                    if(newMail.equals("")){
+                        newMail = preMail;
+                    }
                     Like [] likes = tablumpDatabaseAdapter.getLikesFromUser(username);
                     Post [] posts = tablumpDatabaseAdapter.getPostsFromUser(username);
                     Notification [] notificaciones = tablumpDatabaseAdapter.getNotificationsFromUser(username);
                     tablumpDatabaseAdapter.deleteUser(username);
-                    tablumpDatabaseAdapter.insertUser(mail.getText().toString(),user.getText().toString(),pass.getText().toString());
-                    //tablumpDatabaseAdapter.updateUser(user.getText().toString(),pass.getText().toString(),mail.getText().toString());
+                    tablumpDatabaseAdapter.insertUser(newMail,newUser,newPass);
                     if(likes!= null) {
                         for (int i = 0; i < likes.length; i++) {
-                            tablumpDatabaseAdapter.updateLike(likes[i].getTitulo().toString(), user.getText().toString());
+                            tablumpDatabaseAdapter.updateLike(likes[i].getTitulo().toString(), newUser);
                         }
                     }
                     if(posts!= null) {
                         for (int i = 0; i < posts.length; i++) {
-                            tablumpDatabaseAdapter.updatePost(posts[i].getTitulo().toString(),posts[i].getTitulo().toString(), posts[i].getDescripcion().toString(), posts[i].getCategory().toString(), user.getText().toString());
+                            tablumpDatabaseAdapter.updatePost(posts[i].getTitulo().toString(),posts[i].getTitulo().toString(), posts[i].getDescripcion().toString(), posts[i].getCategory().toString(), newUser);
                         }
                     }
                     if(notificaciones!= null) {
                         for (int i = 0; i < notificaciones.length; i++) {
-                            tablumpDatabaseAdapter.updateNotification(notificaciones[i].getTipo().toString(), notificaciones[i].getTitulo().toString(), user.getText().toString(), notificaciones[i].getUsuarioRealiza().toString());
+                            tablumpDatabaseAdapter.updateNotification(notificaciones[i].getTipo().toString(), notificaciones[i].getTitulo().toString(), newUser, notificaciones[i].getUsuarioRealiza().toString());
                         }
                     }
                     tablumpDatabaseAdapter.close();
                     Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
 
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("username", user.getText().toString());
+                    editor.putString("username", newUser);
                     editor.commit();
 
                     NotificationManager notificationManager = (NotificationManager)

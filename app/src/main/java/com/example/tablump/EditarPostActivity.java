@@ -49,7 +49,7 @@ public class EditarPostActivity extends AppCompatActivity {
                     Comment[] comments = tablumpDatabaseAdapter.getCommentFromTitle(title);
                     if(comments != null){
                         for(int i = 0;i<comments.length;i++){
-                            tablumpDatabaseAdapter.insertComment(title,comments[i].getUser().toString(),comments[i].getContent().toString());
+                            tablumpDatabaseAdapter.insertComment(titulo.getText().toString(),comments[i].getUser().toString(),comments[i].getContent().toString());
                         }
                     }
                     tablumpDatabaseAdapter.updatePost(title,titulo.getText().toString(),descripcion.getText().toString(),spinner1.getSelectedItem().toString(),username);

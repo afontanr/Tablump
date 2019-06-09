@@ -20,9 +20,6 @@ public class EditarPerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editarperfil);
 
-        Intent intent = getIntent();
-        username = intent.getStringExtra("usuario");
-
         Button accept = findViewById(R.id.editarperfil_boton);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +30,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 TablumpDatabaseAdapter tablumpDatabaseAdapter = new TablumpDatabaseAdapter(getApplicationContext());
                 tablumpDatabaseAdapter.open();
                 sp = getSharedPreferences("preferences", Context.MODE_PRIVATE);
-
+                username = sp.getString("username","");
 
                 if(user.getText().toString().equals("") || pass.getText().toString().equals("") || mail.getText().toString().equals("")){
                     tablumpDatabaseAdapter.close();
@@ -63,7 +60,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                         }
                     }
                     tablumpDatabaseAdapter.close();
-                    Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                    Intent intent = new Intent(getBaseContext(), PerfilActivity.class);
 
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("username", user.getText().toString());

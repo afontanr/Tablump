@@ -71,6 +71,10 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("usuario");
 
+        if(username == null){
+            username = sp.getString("username","");
+        }
+
         SharedPreferences.Editor editor = sp.edit();
         //if (sp.getString("username","").equals("")) {
             editor.putString("username", username);
@@ -278,24 +282,29 @@ public class PrincipalActivity extends AppCompatActivity {
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(adapter);
 
+            Log.d("HHHHHHHHHHHHHHH", username);
+            Log.d("HHHHHHHHHHHHHHH", sp.getString("username",""));
 
-            NotificationManager notificationManager = (NotificationManager)
-                    this.getSystemService(Context.NOTIFICATION_SERVICE);
-            //Toast.makeText(this, sp.getString("username",""), Toast.LENGTH_LONG).show();
-            final String channelId = sp.getString("username","");
-            final CharSequence channelName = username;
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel notificationChannel = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                notificationChannel = new NotificationChannel(channelId, channelName,
-                        importance);
-                notificationChannel.enableLights(true);
-                notificationChannel.setLightColor(Color.RED);
-                notificationChannel.enableVibration(true);
-                notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400,
-                        500, 400, 300, 200, 400});
-                notificationManager.createNotificationChannel(notificationChannel);
-            }
+
+            //if (username != null && !username.equals("")) {
+                NotificationManager notificationManager = (NotificationManager)
+                        this.getSystemService(Context.NOTIFICATION_SERVICE);
+                //Toast.makeText(this, sp.getString("username",""), Toast.LENGTH_LONG).show();
+                final String channelId = sp.getString("username","");
+                final CharSequence channelName = sp.getString("username","");
+                int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                NotificationChannel notificationChannel = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    notificationChannel = new NotificationChannel(channelId, channelName,
+                            importance);
+                    notificationChannel.enableLights(true);
+                    notificationChannel.setLightColor(Color.RED);
+                    notificationChannel.enableVibration(true);
+                    notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400,
+                            500, 400, 300, 200, 400});
+                    notificationManager.createNotificationChannel(notificationChannel);
+                }
+            //}
         }
     }
 

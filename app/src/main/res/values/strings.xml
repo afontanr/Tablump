@@ -42,9 +42,9 @@
 
     <string name="spinner_prompt">Seleccione una categoría</string>
     <string-array name="spinner_categorias">
-        <item>Anuncios</item>
-        <item>Objetos perdidos</item>
-        <item>Dudas</item>
+        <item>anuncios</item>
+        <item>objetos perdidos</item>
+        <item>dudas</item>
     </string-array>
     <string name="action_comentar">Comentar</string>
 

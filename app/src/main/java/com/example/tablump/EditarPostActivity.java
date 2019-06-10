@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -24,6 +25,9 @@ public class EditarPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_post);
+
+        Intent intent1 = getIntent();
+        title = intent1.getStringExtra("title");
 
         Button accept = findViewById(R.id.acceptButton);
         accept.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +86,21 @@ public class EditarPostActivity extends AppCompatActivity {
     public void addListenerOnSpinnerItemSelection() {
         spinner1 = (Spinner) findViewById(R.id.spinner);
         //spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra("titulo", title);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
